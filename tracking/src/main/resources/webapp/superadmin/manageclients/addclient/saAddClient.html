@@ -1,0 +1,110 @@
+<div>
+	<br>
+	<div class="row page-header">
+		<h1>{{heading}}</h1>
+	</div>
+	
+
+	<form name="addForm">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group {{clientNameFeedback}}">
+							<label>Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="1"
+								ng-change="validClientName(addForm.clientName.$invalid)"
+								ng-model="client.clientName" name="clientName"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="clientNameValid" style="color: red">
+								Please Enter valid Name
+							</div>
+							<span ng-show="clientNameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientNameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{clientEmailFeedback}}">
+							<label>Email</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="3" ng-disabled="editMode"
+								ng-change="validClientEmail(addForm.email.$invalid)"
+								ng-model="client.email" name="email"
+								ng-maxlength="50" ng-minlength="7"
+								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/"
+								placeholder="eg :(aaa@aa.aaa)" required>
+							<div ng-show="clientEmailValid" style="color: red">Please
+								Enter valid email ID</div>
+							<span ng-show="clientEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{clientContactNumberFeedback}}">
+							<label>Contact Number</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="5" type="number"
+								ng-change="validContactNumber(addForm.contactNumber.$invalid)"
+								ng-model="client.contactNumber" name="contactNumber"  ngMinlength="10" ngMaxlength="10"
+								placeholder="eg :(XXXXXXXXXX) 10 digits  " 
+								ng-pattern="/^\d{10}$/"
+								required>
+							<div ng-show="clientContactNumberValid" style="color: red">Please Enter
+								valid Phone Number</div>
+							<span ng-show="clientContactNumberSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientContactNumberError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group {{clientStreetFeedback}}">
+							<label>Street/Building Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" ng-disabled="editMode" tabindex="2"
+								ng-change="validStreet(addForm.clientStreet.$invalid)"
+								ng-model="client.street" name="street"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="clientStreetValid" style="color: red">Please
+								Enter valid Street/Building Name</div>
+							<span ng-show="clientStreetSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientStreetError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{clientLandmarkFeedback}}">
+							<label>Landmark</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="7"
+								ng-change="validLandmark(addForm.landmark.$invalid)"
+								ng-model="client.landmark" name="landmark"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="clientLandmarkValid" style="color: red">
+								Please Enter valid landmark</div>
+							<span ng-show="clientLandmarkSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientLandmarkError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{clientCityFeedback}}">
+							<label>City</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="7"
+								ng-change="validCity(addForm.city.$invalid)"
+								ng-model="client.city" name="city"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="clientCityValid" style="color: red">
+								Please Enter valid landmark</div>
+							<span ng-show="clientCitySuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="clientCityError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+			
+						</div>
+					</div>
+
+					<div class="col-lg-8" ng-hide="addForm.$valid" style="color: red">Enter
+						all mandatory fields marked with *</div>
+
+				</div>
+
+				<div class="row text-center">
+					<button class="btn btn-success" tabindex="8" type="button"
+						ng-disabled="addForm.$invalid" ng-click="addClient()">
+						<i class="fa fa-check"></i>&nbsp; Save
+					</button>
+
+					<button class="btn btn-danger" tabindex="9" type="button"
+						ng-click="cancelAddClient()">
+						<i class="fa fa-times"></i>&nbsp; Cancel
+					</button>
+				</div>
+	</form>
+
+</div>

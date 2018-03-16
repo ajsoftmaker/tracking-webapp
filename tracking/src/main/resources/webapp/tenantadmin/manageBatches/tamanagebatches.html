@@ -1,0 +1,122 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-group" style="color: #337ab7;"></i>&nbsp; Manage
+			Batches
+		</h1>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Batch Requests</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="batcheRequests.length==0">
+				<br>
+				<h4>
+					<label>There are no batch requests</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="batcheRequests.length>0">
+				<table id="taBatcheRequestsDataTable" datatable="ng" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 30%; text-align: center;">Course</th>
+							<th style="width: 20%; text-align: center;">Start Date</th>
+							<th style="width: 20%; text-align: center;">Status</th>
+							<th style="width: 30%; text-align: center;">Reason</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batche in batcheRequests track by $index"
+							class="item">
+							<td style="text-align: center;"><a href="#"
+								ng-click="requestBatch(batche.id)">{{getCourseName(batche.courseID)}}</a></td>
+							<td style="text-align: center;">{{batche.startDate}}</td>
+							<td style="text-align: center; color: green;" ng-if='batche.requestStatus!="Declined"'>
+								{{batche.requestStatus}}
+							</td>
+							<td style="text-align: center; color: red;" ng-if='batche.requestStatus=="Declined"'>
+								{{batche.requestStatus}}
+							</td>
+							<td ng-if='batche.requestStatus!="Declined"'></td>
+							<td style="text-align: center;" ng-if='batche.requestStatus=="Declined"'>
+								{{batche.reason}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">Scheduled Batches</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="batchesOnGoing.length==0">
+				<br>
+				<h4>
+					<label>There are no scheduled batches</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="batchesOnGoing.length>0">
+				<table id="taBatchesOnGoingDataTable" datatable="ng" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 30%; text-align: center;">Course</th>
+							<th style="width: 40%; text-align: center;">Batch Dates</th>
+							<th style="width: 30%; text-align: center;">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batchGoing in batchesOnGoing track by $index" class="item">
+							<td style="text-align: center;"><a href="#"
+								ng-click="singleBatch(batchGoing.id)">{{getCourseName(batchGoing.courseID)}}</a></td>
+							<td style="text-align: center;">{{getDate(batchGoing.startDate,batchGoing.endDate)}}</td>
+							<td style="text-align: center;">
+								<button class="btn btn-danger btn-xs" type="button"
+									ng-click="onCancel(batchGoing)">
+									<i class="fa fa-times"></i>&nbsp; Cancel
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">Done Earlier</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="batchesDone.length==0">
+				<br>
+				<h4>
+					<label>No batches done earlier</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="batchesDone.length>0">
+				<table id="taBatchesDoneDataTable" datatable="ng" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 50%; text-align: center;">Course</th>
+							<th style="width: 50%; text-align: center;">Batch Dates</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batchDone in batchesDone track by $index" class="item">
+							<td style="text-align: center;">
+								<a href="#" ng-click="singleBatch(batchDone.id)">
+									{{getCourseName(batchDone.courseID)}}
+								</a>
+							</td>
+							<td style="text-align: center;">{{getDate(batchDone.startDate,batchDone.endDate)}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang='en'>
+
+<body style="overflow: scroll">
+	<div ng-if="!reportMode">
+		<header-directive></header-directive>
+	
+		<sa-sidebar-directive ng-if="user.userRole == 'superadmin'"></sa-sidebar-directive>
+		<ta-sidebar-directive ng-if="user.userRole == 'tenantadmin'"></ta-sidebar-directive>
+		<st-sidebar-directive ng-if="user.userRole == 'student'"></st-sidebar-directive>
+		
+		<div id="wrapper">
+			<div id="page-wrapper" style="min-height: 561px;">
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="reportMode" style="background-color:white;">
+		<div ui-view></div>
+	</div>	
+	
+</body>
+</html>
+
+
+   
+

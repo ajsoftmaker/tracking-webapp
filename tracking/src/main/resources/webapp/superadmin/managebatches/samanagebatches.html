@@ -1,0 +1,237 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-heart" style="color: #337ab7;"></i>&nbsp; Manage
+			Patient
+			<button class="btn btn-primary pull-right" type="button"
+				ng-click=""><!-- addNewCourse() -->
+				<i class="fa fa-plus-circle"></i>&nbsp; New Patient
+			</button>
+		</h1>
+	</div>
+	<div class="row">
+		<a href="#scheduled" id="scheduled-link" class="link" rel="scheduled">Patient</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		<a href="#newrequests"
+			id="newrequests-link" class="link" rel="newrequests">New Requests
+			({{batchRequests.length}})</a> <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+		<br>
+		<br>
+	</div>
+	
+	<div id="scheduled" style="width: 100%; display: none;">
+		<!-- <div class="panel panel-primary">
+			<div class="panel-heading">Ongoing This Week</div>
+			<div class="panel-body">
+				<div class="row text-center" ng-if="ongoingBatches.length==0">
+					<br>
+					<h4>
+						<label>There are no ongoing batches this week</label>
+					</h4>
+					<br>
+				</div>
+				<table id="saOngoingBatchesDataTable"  datatable style="width: 100%;"
+					ng-if="ongoingBatches.length>0" class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width: 20%; text-align: center;">Course ID</th>
+							<th style="width: 20%; text-align: center;">Course Name</th>
+							<th style="width: 20%; text-align: center;">Company</th>
+							<th style="width: 15%; text-align: center;">Attendees</th>
+							<th style="width: 15%; text-align: center;">State</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batch in ongoingBatches track by $index"
+							class="item">
+							<td style="text-align: center;"><a href="#"
+								ng-click="singleBatch(batch.id)">{{getCourseID(batch.courseID)}}</a></td>
+							<td style="text-align: center;">{{getCourseName(batch.courseID)}}</td>
+							<td style="text-align: center;">{{getCompanyName(batch.tenantID)}}</td>
+							<td style="text-align: center;">{{batch.numStudents}}</td>
+							<td style="text-align: center;">{{batch.batchState}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div> -->
+
+		<div class="panel panel-green">
+			<div class="panel-heading">Active Patients</div>
+			<div class="panel-body">
+				<div class="row text-center" ng-if="nextWeekBatches.length==0">
+					<br>
+					<h4>
+						<label>There are no Active Patients</label>
+					</h4>
+					<br>
+				</div>
+				<table id="saNextWeekBatchesDataTable"  datatable style="width: 100%;"
+					class="table table-bordered" ng-if="nextWeekBatches.length>0">
+					<thead>
+						<tr>
+							<th style="width: 20%; text-align: center;">Course ID</th>
+							<th style="width: 20%; text-align: center;">Course Name</th>
+							<th style="width: 20%; text-align: center;">Company</th>
+							<th style="width: 15%; text-align: center;">Attendees</th>
+							<th style="width: 15%; text-align: center;">State</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batch in nextWeekBatches track by $index"
+							class="item">
+							<td style="text-align: center;"><a href="#"
+								ng-click="singleBatch(batch.id)">{{getCourseID(batch.courseID)}}</a></td>
+							<td style="text-align: center;">{{getCourseName(batch.courseID)}}</td>
+							<td style="text-align: center;">{{getCompanyName(batch.tenantID)}}</td>
+							<td style="text-align: center;">{{batch.numStudents}}</td>
+							<td style="text-align: center;">{{batch.batchState}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- <div class="panel panel-info">
+			<div class="panel-heading">Beyond</div>
+			<div class="panel-body">
+				<div class="row text-center" ng-if="futureBatches.length==0">
+					<br>
+					<h4>
+						<label>There are no batches beyond next week</label>
+					</h4>
+					<br>
+				</div>
+				<table id="saFutureBatchesDataTable" datatable style="width: 100%;"
+					class="table table-bordered" ng-if="futureBatches.length>0">
+					<thead>
+						<tr>
+							<th style="width: 20%; text-align: center;">Course ID</th>
+							<th style="width: 20%; text-align: center;">Course Name</th>
+							<th style="width: 20%; text-align: center;">Company</th>
+							<th style="width: 15%; text-align: center;">Attendees</th>
+							<th style="width: 15%; text-align: center;">State</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="batch in futureBatches track by $index"
+							class="item">
+							<td style="text-align: center;"><a href="#"
+								ng-click="singleBatch(batch.id)">{{getCourseID(batch.courseID)}}</a></td>
+							<td style="text-align: center;">{{getCourseName(batch.courseID)}}</td>
+							<td style="text-align: center;">{{getCompanyName(batch.tenantID)}}</td>
+							<td style="text-align: center;">{{batch.numStudents}}</td>
+							<td style="text-align: center;">{{batch.batchState}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Done Earlier</div>
+			<div class="panel-body">
+				<div class="row text-center" ng-if="batchesDone.length==0">
+					<br>
+					<h4>
+						<label>No batches done earlier</label>
+					</h4>
+					<br>
+				</div>
+				<div ng-if="batchesDone.length>0">
+					<table id="saBatchesDoneDataTable" datatable class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 50%; text-align: center;">Course</th>
+								<th style="width: 50%; text-align: center;">Batch Dates</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="batchDone in batchesDone track by $index"
+								class="item">
+								<td style="text-align: center;"><a href="#"
+									ng-click="singleBatch(batchDone.id)">
+										{{getCourseName(batchDone.courseID)}} </a></td>
+								<td style="text-align: center;">{{getDate(batchDone.startDate,batchDone.endDate)}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div> -->
+	</div>
+
+	<div id="newrequests" style="width: 100%; display: none;">
+		<div class="panel panel-info">
+			<div class="panel-heading">New Patient Requests</div>
+			<div class="panel-body">
+				<div class="row text-center" ng-if="batchRequests.length==0">
+					<br>
+					<h4>
+						<label>There are no new Patient Requests</label>
+					</h4>
+					<br>
+				</div>
+				<table datatable="ng" style="width: 100%;"
+					class="table table-bordered" ng-if="batchRequests.length>0">
+					<thead>
+						<tr>
+							<th style="width: 20%; text-align: center;">Course Name/ID</th>
+							<th style="width: 20%; text-align: center;">Company
+							<th style="width: 15%; text-align: center;">Request Dates</th>
+							<th style="width: 15%; text-align: center;">Attendees</th>
+							<th style="width: 15%; text-align: center;">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="request in batchRequests track by $index"
+							class="item" ng-if="request.requestStatus=='Pending'">
+							<td style="text-align: center;">{{getCourseName(request.courseID)}}/{{getCourseID(request.courseID)}}</td>
+							<td style="text-align: center;">{{getCompanyName(request.tenantID)}}</td>
+							<td style="text-align: center;">{{request.startDate}}</td>
+							<td style="text-align: center;">{{request.numStudents}}</td>
+							<td style="text-align: center;">
+								<button class="btn btn-primary btn-xs" type="button"
+									ng-click="onAccepted(request,'Accepted')">
+									<i class="fa fa-check"></i>&nbsp; Accept
+								</button>
+								<button class="btn btn-warning btn-xs" type="button"
+									data-target="#reject-batchs" data-toggle="modal"
+									ng-click="getRequest(request)">
+									<i class="fa fa-times"></i>&nbsp; Reject
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!---------------------------------------------------------->
+<div class="modal fade" id="reject-batchs" role="dialog">
+	<form name="addForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Are you sure?</h4>
+				</div>
+				<div style="padding: 3%; padding-right: 15%; padding-left: 15%;">
+					This will reject the batch request and notify the client. <label>Provide
+						a reason :</label>
+					<textarea class="form-control" rows="4" ng-required="true"
+						ng-model="reason" />
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<i class="fa fa-times"></i>&nbsp; No
+						</button>
+						<button type="submit" class="btn btn-success" data-dismiss="modal"
+							ng-disabled="addForm.$invalid"
+							data-ng-click="onDeclined('Declined',reason)">
+							<i class="fa fa-check"></i>&nbsp; Yes
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,13 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Welcome Student</h1>
+        </div>
+    </div>
+    <div class="row">
+        <a ui-sref="home.stbatches"><st_stats number={{registeredcourses}} comments="Registered courses" colour="primary" type="fa fa-book"></st_stats></a>
+        <a ui-sref="home.stviewcourses"><st_stats number={{availableCourses}} comments="Available Courses" colour="yellow" type="fa fa-list"></st_stats></a>
+        <st_stats number={{testsPassed}} comments="Tests Passed" colour="green" type="fa fa-trophy"></st_stats>
+        <st_stats number={{testsFailed}} comments="Tests Failed" colour="red" type="fa fa-times"></st_stats>
+    </div>
+</div>

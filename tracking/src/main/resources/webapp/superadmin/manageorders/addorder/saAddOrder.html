@@ -1,0 +1,261 @@
+<div>
+	<br>
+	<div class="row page-header">
+		<h1>{{heading}}</h1>
+	</div>
+	
+
+	<form name="addForm">
+				<!-- From Client -->
+		<div class="panel panel-info">
+			<div class="panel-heading">From Client Details</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group {{fromClientNameFeedback}}">
+							<label>Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="1"
+								ng-change="validFromClientName(addForm.fromClientName.$invalid)"
+								ng-model="fromClient.clientName" name="fromClientName"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="fromClientNameValid" style="color: red">
+								Please Enter valid Name
+							</div>
+							<span ng-show="fromClientNameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientNameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{fromClientEmailFeedback}}">
+							<label>Email</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="3" ng-disabled="editMode"
+								ng-change="validFromClientEmail(addForm.fromemail.$invalid)"
+								ng-model="fromClient.email" name="fromemail"
+								ng-maxlength="50" ng-minlength="7"
+								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/"
+								placeholder="eg :(aaa@aa.aaa)" required>
+							<div ng-show="fromClientEmailValid" style="color: red">Please
+								Enter valid email ID</div>
+							<span ng-show="fromClientEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{fromClientContactNumberFeedback}}">
+							<label>Contact Number</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="5" type="number"
+								ng-change="validFromContactNumber(addForm.fromcontactNumber.$invalid)"
+								ng-model="fromClient.contactNumber" name="fromcontactNumber"  ngMinlength="10" ngMaxlength="10"
+								placeholder="eg :(XXXXXXXXXX) 10 digits  " 
+								ng-pattern="/^\d{10}$/"
+								required>
+							<div ng-show="fromClientContactNumberValid" style="color: red">Please Enter
+								valid Phone Number</div>
+							<span ng-show="fromClientContactNumberSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientContactNumberError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group {{fromClientStreetFeedback}}">
+							<label>Street/Building Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" ng-disabled="editMode" tabindex="2"
+								ng-change="validFromStreet(addForm.fromclientStreet.$invalid)"
+								ng-model="fromClient.street" name="fromstreet"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="fromClientStreetValid" style="color: red">Please
+								Enter valid Street/Building Name</div>
+							<span ng-show="fromClientStreetSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientStreetError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{fromClientLandmarkFeedback}}">
+							<label>Landmark</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="4"
+								ng-change="validFromLandmark(addForm.fromlandmark.$invalid)"
+								ng-model="fromClient.landmark" name="fromlandmark"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="fromClientLandmarkValid" style="color: red">
+								Please Enter valid landmark</div>
+							<span ng-show="fromClientLandmarkSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientLandmarkError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{fromClientCityFeedback}}">
+							<label>City</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="6"
+								ng-change="validFromCity(addForm.fromcity.$invalid)"
+								ng-model="fromClient.city" name="fromcity"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="fromClientCityValid" style="color: red">
+								Please Enter valid city</div>
+							<span ng-show="fromClientCitySuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="fromClientCityError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+			
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+				
+				<!-- From Client End -->
+				
+				<!-- To Client -->
+		<div class="panel panel-info">
+			<div class="panel-heading">To Client Details</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group {{toClientNameFeedback}}">
+							<label>Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="7"
+								ng-change="validToClientName(addForm.toclientName.$invalid)"
+								ng-model="toClient.clientName" name="toclientName"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="toClientNameValid" style="color: red">
+								Please Enter valid Name
+							</div>
+							<span ng-show="toClientNameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientNameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{toClientEmailFeedback}}">
+							<label>Email</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="9" ng-disabled="editMode"
+								ng-change="validToClientEmail(addForm.toemail.$invalid)"
+								ng-model="toClient.email" name="toemail"
+								ng-maxlength="50" ng-minlength="7"
+								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/"
+								placeholder="eg :(aaa@aa.aaa)" required>
+							<div ng-show="toClientEmailValid" style="color: red">Please
+								Enter valid email ID</div>
+							<span ng-show="toClientEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{toClientContactNumberFeedback}}">
+							<label>Contact Number</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="11" type="number"
+								ng-change="validToContactNumber(addForm.tocontactNumber.$invalid)"
+								ng-model="toClient.contactNumber" name="tocontactNumber"  ngMinlength="10" ngMaxlength="10"
+								placeholder="eg :(XXXXXXXXXX) 10 digits  " 
+								ng-pattern="/^\d{10}$/"
+								required>
+							<div ng-show="toClientContactNumberValid" style="color: red">Please Enter
+								valid Phone Number</div>
+							<span ng-show="toClientContactNumberSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientContactNumberError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group {{toClientStreetFeedback}}">
+							<label>Street/Building Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" ng-disabled="editMode" tabindex="8"
+								ng-change="validToStreet(addForm.toclientStreet.$invalid)"
+								ng-model="toClient.street" name="tostreet"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="toClientStreetValid" style="color: red">Please
+								Enter valid Street/Building Name</div>
+							<span ng-show="toClientStreetSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientStreetError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{toClientLandmarkFeedback}}">
+							<label>Landmark</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="10"
+								ng-change="validToLandmark(addForm.tolandmark.$invalid)"
+								ng-model="toClient.landmark" name="tolandmark"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="toClientLandmarkValid" style="color: red">
+								Please Enter valid landmark</div>
+							<span ng-show="toClientLandmarkSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientLandmarkError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{toClientCityFeedback}}">
+							<label>City</label><label style="color: red">&nbsp*</label> 
+							<input class="form-control" tabindex="12"
+								ng-change="validToCity(addForm.tocity.$invalid)"
+								ng-model="toClient.city" name="tocity"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="toClientCityValid" style="color: red">
+								Please Enter valid city</div>
+							<span ng-show="toClientCitySuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="toClientCityError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+			
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				<!-- To Client End  -->
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="form-group">
+					<label>Type</label><label style="color: red">&nbsp*</label> 
+					<select class="form-control" tabindex="13" ng-model="order.type">
+						<option value="Document">Document</option>
+						<option value="Parcel">Parcel</option>
+						<option value="Loose">Loose</option>
+						<option value="Bulk">Bulk</option>
+					</select> 
+				</div>
+				
+				<div class="form-group">
+					<label>Status</label><label style="color: red">&nbsp*</label> 
+					<select class="form-control" tabindex="15" ng-model="order.status">
+						<option value="In transit">In transit</option>
+						<option value="Out for delivery">Out for delivery</option>
+						<option value="Delivered">Delivered</option>
+						<option value="On hold">On hold</option>
+					</select> 
+				</div>
+			</div>
+			
+			<div class="col-lg-6">
+				<div class="form-group">
+					<label>Weight</label>&nbsp&nbsp
+					<label class="radio-inline">
+						<input type="radio" name="kg" id="kg" value="kg" checked="" ng-model="order.weightMode">kg 
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="gm" id="gm" value="gm" ng-model="order.weightMode">gm
+					</label>
+					<input class="form-control" tabindex="14" type="number"
+						 ng-model="order.weight" name="weight"  ngMinlength="1" ngMaxlength="10"
+						placeholder="eg :(XX.XX)  ">
+				</div>
+				
+				<div class="form-group {{orderLocationFeedback}}">
+					<label>Current Location</label><label style="color: red">&nbsp*</label> 
+					<input class="form-control" tabindex="16"
+						ng-change="validLocation(addForm.location.$invalid)"
+						ng-model="order.location" name="location"
+						ng-pattern="/^[a-zA-Z  ]*$/" required>
+					<div ng-show="locationValid" style="color: red">
+						Please Enter valid city</div>
+					<span ng-show="locationSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<span ng-show="locationError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+	
+				</div>
+			</div>
+		</div>
+		
+		<div class="row text-center" ng-hide="addForm.$valid" style="color: red">
+		Enter all mandatory fields marked with *
+		</div>
+
+				<div class="row text-center">
+					<button class="btn btn-success" tabindex="17" type="button"
+						ng-disabled="addForm.$invalid" ng-click="addClient()">
+						<i class="fa fa-check"></i>&nbsp; Save
+					</button>
+
+					<button class="btn btn-danger" tabindex="18" type="button"
+						ng-click="cancelAddClient()">
+						<i class="fa fa-times"></i>&nbsp; Cancel
+					</button>
+				</div>
+	</form>
+
+</div>

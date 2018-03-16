@@ -1,0 +1,130 @@
+<div ng-if="importStudent==false">
+	
+	<div class="row">
+		<h1 class="page-header">Create Batch</h1>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">Course Details</div>
+
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-5">
+					<label>Course ID : &nbsp;</label>{{course.courseID}}
+				</div>
+				<div class="col-lg-5">
+					<label>Course Name : &nbsp;</label>{{course.courseName}}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-5">
+					<label>Maximum Class Size : &nbsp;</label>{{course.maxClassSize}}
+				</div>
+
+				<div class="col-lg-5">
+					<label>Setup Time Needed : &nbsp;</label>{{course.setupTimeDays}}
+				</div>
+			</div>
+
+			<div class="form-inline">
+				<label>Description : &nbsp;</label>{{course.description}}
+			</div>
+
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">Batch Details</div>
+
+		<div class="panel-body">
+			<div class="form-inline">
+				<label>
+					<i class="fa fa-calendar" style="color: #337ab7;"></i>
+					&nbsp;Start Date : &nbsp;
+				</label> 
+				<input type="text" class="form-control date"
+					id="dateFrom" placeholder="Date" ng-click="dateFrom=true"
+					datepicker-popup="dd-MMM-yyyy" ng-model="startDate"
+					is-open="dateFrom" datepicker-options="dateOptions"
+					date-disabled="disabled(date, mode)" ng-required="true"
+					close-text="Close" min-date="{{currentDate}}" ng-change="onStartDate(startDate)"
+					style="width: 15%; margin-right: 2%;">
+
+			</div>
+
+			<br>
+			<div class="form-inline">
+				<input type="radio" for="autocomplete" name="optionsRadios" ng-model="studentMode" ng-value='"auto"'>
+				<label>&nbsp;Select Students</label> 
+				<br> 
+				
+				<div mass-autocomplete>
+					<input class="form-control" ng-model="dirty.value" mass-autocomplete-item="autocomplete_options" ng-disabled="studentMode!='auto'">
+				</div>
+				<br>
+				<button class="btn btn-success" type="button" ng-click="onAdd(dirty.value)" ng-disabled="studentMode!='auto'">
+					<i class="fa fa-plus-circle"></i>&nbsp; Add
+				</button>
+			</div>
+			
+			<br>
+			<div class="form-inline">
+				<input type="radio" name="optionsRadios" ng-model="studentMode" ng-value='"import"'>
+				<label>&nbsp;Import Students From CSV</label> 
+				<br>
+				<button class="btn btn-success" type="button" ng-click="onImport()" ng-disabled="studentMode!='import'">
+					<i class="fa fa-plus-circle"></i>&nbsp; Import Students
+				</button>
+			</div>
+			<br>
+			<div>
+				<div class="row text-center" ng-if="studentList.length==0">
+					<br>
+					<h4>
+						<label>No students have been added</label>
+					</h4>
+					<br>
+				</div>
+
+				<div ng-if="studentList.length>0">
+					<table id ="taStudentListDataTable " datatable="ng" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 20%; text-align: center;">Name</th>
+								<th style="width: 20%; text-align: center;">ID</th>
+								<th style="width: 15%; text-align: center;">Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="student in studentList track by $index"
+								class="item">
+								<td style="text-align: center;">{{student.studentName}}</td>
+								<td style="text-align: center;">{{student.studentID}}</td>
+								<td style="text-align: center;">
+									<button class="btn btn-danger btn-xs" type="button" ng-click="onDelete(student)">
+										<i class="fa fa-minus-circle"></i>&nbsp; Delete
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="row" style="text-align: center;">
+				<hr>
+				<button class="btn btn-success" type="button" ng-click="onRequest()" ng-disabled="studentList.length==0">
+					<i class="fa fa-check"></i>&nbsp; Request
+				</button>
+				<button class="btn btn-danger" type="button" ng-click="onCancel()">
+					<i class="fa fa-times"></i>&nbsp; Cancel
+				</button>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<div ng-if="importStudent==true" ui-view></div>

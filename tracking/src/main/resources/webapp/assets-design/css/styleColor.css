@@ -1,0 +1,119 @@
+/*
+    Theme Name: Multi
+    Theme URL: https://bootstrapmade.com/multi-responsive-bootstrap-template/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+*/
+/* ==== Google font ==== */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+
+@import url('font-awesome.css');
+/* ==== overwrite bootstrap standard ==== */
+@import url('overwrite.css');
+@import url('animate.css');
+
+
+.btn-primary {
+	background: #ED502E;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus{
+  background: #eb8984;
+} 
+
+.btn-default:hover {
+	color:#ED502E;
+}
+
+.navbar-brand h1 span {
+	color: #ED502E;
+}
+
+.nav-tabs > li > a:hover {	
+	color: #ED502E;
+}
+.nav-tabs > li > a.active {
+	color: #ED502E;
+}
+.box i {
+	background:#ED502E;
+}
+.box i:hover {
+	color:#ED502E;
+}
+
+.main-feature .media i {
+	background:#ED502E;
+}
+
+.main-feature .text-center {
+	background:#fD502E;
+}
+
+.progress .color4,
+.progress .color4 .bar-width{
+  background: #db3615;
+}
+
+.progress .color4 span:before{
+    border-color: #db3615 transparent transparent transparent;
+  }
+
+  .badge {
+    background-color: #ED502E;
+  }
+
+  #publish_date {
+    background: #ED502E;
+  }
+
+  ul.pagination > li.active > a, 
+  ul.pagination > li:hover > a {
+    background-color: #ED502E !important;
+    border-color: #ED502E !important;
+  }
+
+  .tag-cloud li a:hover{
+    background:#ED502E;
+  }
+
+  .recent-work-wrap .overlay {
+    background: #ED502E;
+  }
+
+  .portfolio-filter > li a:hover,
+  .portfolio-filter > li a.active{
+    background: #ED502E;
+    border: 1px solid #ED502E;
+  }
+
+  .contact-info i {
+	color:#eb8984;	
+}
+
+.validation {
+    color: red;
+}
+
+#errormessage {
+    color: red;
+    border:1px solid red;
+}
+
+.social-network li:hover .fa-pinterest {
+    color: #c9171e;
+    
+  }
+
+  .footer ul li:hover {
+	color:#ED502E;
+}
+
+.sub-footer a:hover {
+  color: #ED502E;
+}
+
+a.scrollup:hover{
+	background-color:#ED502E;
+}

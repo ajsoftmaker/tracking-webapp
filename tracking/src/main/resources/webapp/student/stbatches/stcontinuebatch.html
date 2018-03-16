@@ -1,0 +1,181 @@
+<div>
+	<div class="row">
+		<h3 class="page-header">
+			{{course.courseID}} &nbsp; - &nbsp; {{course.courseName}}<br>
+			{{batch.startDate}} &nbsp; to &nbsp; {{batch.endDate}}
+		</h3>
+	</div>
+	
+	<ul class="nav nav-tabs" ng-show="!takeATest">
+            <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Description</a></li>
+            <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Files</a></li>
+            <li ng-class="{active:isSet(3)}"><a href ng-click="setTab(3)">Lab</a></li>
+            <li ng-class="{active:isSet(4)}"><a href ng-click="setTab(4)">Tests</a></li>
+    </ul>
+        
+        <div ng-show="isSet(1)"> <!-- -----Description of course----- -->
+        	<div class="panel panel-default">
+				<div class="panel-heading"> Course Details </div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-5">
+							<label>Course ID &nbsp; : &nbsp;</label>{{course.courseID}}
+						</div>
+						
+						<div class="col-lg-5">
+							<label>Course Name &nbsp; : &nbsp;</label>{{course.courseName}}
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<label>Description &nbsp; : &nbsp;</label>{{course.description}}
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-5">
+							<label>Course Type &nbsp; : &nbsp;</label>{{course.courseType}}
+						</div>
+						
+						<div class="col-lg-5">
+							<label>Course Level &nbsp; : &nbsp;</label>{{course.courseLevel}}
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-5">
+							<label>Tech Platform &nbsp; : &nbsp;</label>{{course.techPlatform}}
+						</div>
+						
+						<div class="col-lg-5">
+							<label>Duration &nbsp; : &nbsp;</label>{{course.durationDays}} &nbsp;Days
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        
+        <div ng-show="isSet(2)"> <!-- -----Files for this course----- -->
+             <div class="panel panel-default">
+   				<div class="panel-heading"> Files Details </div>
+   				<div class="panel-body">
+   					<div class="row text-center" ng-if="files.length==0">
+   						<br>
+   						<h4><label>There are no files for this course</label></h4>
+   						<br>
+   					</div>
+   					<table class="table table-striped" ng-if="files.length>0">
+						<tbody>
+							<tr ng-repeat="file in files track by $index" class="item">
+								<td style="width:60%">{{file.fileName}}</td>
+								
+								<td class="text-center" style="width:40%" ng-if="file.mode=='view'">
+									<a href={{onFileDownload}}{{file.fileName}}>
+									<button class="btn btn-success btn-xs" type="button">
+										<i class="fa fa-download"></i>&nbsp;
+										Download
+									</button></a>
+								</td>
+								<td class="text-center" style="width:40%" ng-if="file.mode!='view'">
+									<button class="btn btn-success btn-xs" type="button" ng-click="">
+										<i class="fa fa-eye"></i>&nbsp;
+										View
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+   				</div>
+   			</div>
+        </div>
+        
+        <div ng-show="isSet(3)"> <!-- -----Lab machines----- -->
+        	<br>
+        	<div class="row">
+        		<div class="col-lg-3" ng-repeat="machine in machines">
+        		
+					<div class="panel panel-default">
+						<div class="panel-heading text-center"> {{machine.connectionName}} </div>
+						<div class="panel-body" style="text-align:center;">
+				     		<a ui-sref-active="active" ng-click="connectMachine(machine)"><span><i class="fa fa-desktop fa-5x"></i></span></a>
+				     		<!-- <a target="_blank" ng-href={{machineURL}} ng-click="connectMachine(machine)"><span><i class="fa fa-desktop fa-5x"></i></span></a> -->
+				     		<!-- <a target="_blank" ng-href={{machineURL}}><span><i class="fa fa-desktop fa-5x"></i></span></a> -->
+				     	</div>
+					</div>
+				</div>
+        	</div>
+        	<br>
+        	<div>
+        	</div>
+        </div>
+        
+        <div ng-show="isSet(4)"> <!-- -----Course tests----- -->
+        	<div class="panel panel-info" ng-if="studentTests.length==0">
+   				<div class="panel-heading"> Tests </div>
+   				<div class="panel-body">
+   					<div class="row text-center">
+   						<br>
+   						<h4><label>There are no tests for this course</label></h4>
+   						<br>
+   					</div>
+   				</div>
+   			</div>
+        	<br>
+        	<table id="stStudentTestsDataTable" datatable="ng" style="width:100%;" class="table table-bordered" ng-if="studentTests.length>0">
+			<thead>
+				<tr>
+					<th style="width:20%;text-align:center;">Test Name</th>
+					<th style="width:20%;text-align:center;">Test Description</th>
+					<th style="width:20%;text-align:center;">Status</th>
+					<th style="width:15%;text-align:center;">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="studentTest in studentTests track by $index" class="item">
+					<td style="text-align:center;">{{studentTest.testName}}</td>
+					<td style="text-align:center;">{{studentTest.description}}</td>
+					<td style="text-align:center;color:#8a6d3b" ng-if="getTestResult(studentTest.id)=='Not Taken'">Not Taken</td>
+					<td style="text-align:center;color:green" ng-if="getTestResult(studentTest.id)=='pass'">Passed</td>
+					<td style="text-align:center;color:red" ng-if="getTestResult(studentTest.id)=='fail'">Failed</td>
+					<td style="text-align:center;">	
+						<button class="btn btn-primary btn-xs" type="button" ng-click="onTakeTest(studentTest)" ng-disabled="getTestResult(studentTest.id)!='Not Taken'">
+							<i class="fa fa-check"></i>&nbsp;
+							Take Test
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			</table>			
+        </div>
+        
+    <div ng-show="takeATest"> <!-- -----Take a test for this course----- -->
+       <div class="panel panel-primary">
+   		<div class="panel-heading"> Test Details </div>
+   		  <div class="panel-body">
+        	
+            <div class="row col-lg-12">
+           		<h4><label>Test Name&nbsp;&nbsp; :</label> {{takeTest.testName}}</h4>
+           	 	<h4><label>Description :</label> {{takeTest.description}}</h4>
+            </div>
+            <br><br>
+            <div class="row" align="center">
+            	<button class="btn btn-success" type="button" ng-click="onVerifyTest(takeTest)">
+             		<i class="fa fa-check"></i>&nbsp;
+             		Verify Test
+             	</button>
+             	&nbsp;&nbsp;
+             	<button class="btn btn-warning" type="button" ng-click="onResetTest(takeTest)">
+             		<i class="fa fa-refresh"></i>&nbsp;
+             		Reset Setup
+             	</button>
+             	&nbsp;&nbsp;
+             	<button class="btn btn-danger" type="button" ng-click="onBack()">
+            		<i class="fa fa-chevron-left"></i>&nbsp;
+            		Back
+            	</button>
+            </div>
+        </div>    
+      </div>      
+    </div>
+</div>

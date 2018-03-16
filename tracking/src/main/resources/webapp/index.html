@@ -1,0 +1,244 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>Neelakshi Couriers</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- Tracking -->
+	<link href="assets-design/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets-design/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets-design/css/jquery.bxslider.css">
+    <link rel="stylesheet" type="text/css" href="assets-design/css/isotope.css" media="screen" />
+    <link rel="stylesheet" href="assets-design/css/animate.css">
+    <link rel="stylesheet" href="assets-design/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    <link href="assets-design/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="assets-design/css/style.css" rel="stylesheet" />
+<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="assets/bower_components/jquery/dist/jquery-ui.js"></script>
+
+<!-- ________________________STYLES _________________________________-->
+
+<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/calendar/fullcalendar.css">
+<link rel="stylesheet" href="assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="assets/range_datepicker/daterangepicker-bs3.css">
+<link rel="stylesheet" href="assets/bootstrap/datepicker.css">
+<!-- <link rel="stylesheet" href="assets/styles/main.css"> -->
+<link rel="stylesheet" href="assets/styles/sb-admin-2.css">
+<link rel="stylesheet" href="assets/styles/ng-table.css">
+<link rel="stylesheet" href="assets/bower_components/metisMenu/dist/metisMenu.min.css">
+<link rel="stylesheet" href="assets/bower_components/angular-loading-bar/build/loading-bar.min.css">
+<link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="assets/support/support.css">
+<link rel="stylesheet" href="assets/bower_components/angular-dialog-service-5.2.8/dist/dialogs.css">
+<link rel="stylesheet" href="assets/dataTables/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="assets/styles/labjump.css">
+<link rel="stylesheet" href="assets/calendar/calendarDemo.css">
+
+<!-- ________________________Text Auto complete _________________________________-->
+    
+<link href="assets/auto-complete/massautocomplete.theme.css" rel="stylesheet" type="text/css">
+
+<!-- ________________________VENDOR SCRIPTS _________________________________-->
+
+<script src="assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="assets/range_datepicker/daterangepicker.js"></script>
+<script src="assets/bootstrap/bootstrap-datepicker.js"></script>
+<script src="assets/bower_components/angular/angular.min.js"></script>
+<!-- <script src="assets/bower_components/angular/angular-ui.min.js"></script> -->
+<script src="assets/range_datepicker/ng-bs-daterangepicker.js"></script>
+<script src="assets/bower_components/angular-resource/angular-resource.js"></script>
+<script src="assets/support/support.js"></script>
+<script src="assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="assets/range_datepicker/moment.min.js"></script>
+<script src="assets/bower_components/angular/ng-table.js"></script>
+<script src="assets/bower_components/angular/ng-table-resizable-columns.js"></script>
+<script src="assets/bower_components/angular-message/angular-messages.js"></script>
+<script src="assets/bower_components/angular-ui-router/angular-ui-router.min.js"></script>
+<script src="assets/bower_components/json3/json3.min.js"></script>
+<script src="assets/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="assets/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+<script src="assets/bower_components/angular-idle/angular-idle.min.js"></script>
+
+<script src="assets/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<script src="assets/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+<script src="assets/bower_components/angular-dialog-service-5.2.8/dist/dialogs.js"></script>
+<script src="assets/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="assets/dataTables/jquery.dataTables.min.js"></script>
+<script src="assets/dataTables/dataTables.bootstrap.min.js"></script>
+<script src="assets/dataTables/angular-datatables.min.js"></script>
+<script src="assets/custom/underscore-min.js"></script>
+<script src="assets/bower_components/angular/ng-map.min.js"></script>
+<script src="assets/bower_components/angular-route/angular-route.min.js"></script>
+<script src="assets/bower_components/file_input/fileinput.min.js"></script>
+<script src="assets/bower_components/checklist-model/checklist-model.js"></script>
+<script src="assets/guacamole-common-js/all.js"></script>
+
+<!--  ________________________CHART_________________________________-->
+
+<script src="assets/chart/Chart.min.js"></script>
+<script src="assets/chart/angular-chart.min.js"></script>
+
+<!--  ________________________CALENDER ______________________________-->
+<script
+	src="assets/bower_components/angular/angular-moment.min.js"></script>
+<script type="text/javascript" src="assets/calendar/calendar.js"></script> 
+<script type="text/javascript" src="assets/calendar/fullcalendar.js"></script>
+<script type="text/javascript" src="assets/calendar/gcal.js"></script>
+
+<!-- ________________________Text Auto complete _________________________________-->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+<script src="assets/auto-complete/massautocomplete.js"></script>
+
+</head>
+
+<body style="overflow: scroll; margin-top: 0px;padding:0px;">
+
+	<div ng-app="trackingWebApp" ng-controller="appController">
+		<div ui-view></div>
+	</div>
+
+	<!-- _________________________LOAD OUR SCRIPTS_________________________ -->
+
+	<script src="assets/labjump/restAPIService.js"></script>
+	<script src="app.js"></script>
+	<script src="sb-admin-2.js"></script>
+	<script src="login/loginController.js"></script>
+	<script src="login/multipleID/multipleIDController.js"></script>
+	<script src="home/homeController.js"></script>
+	<script src="header/headerDirective.js"></script>
+	<script src="header/headerController.js"></script>
+	<script src="header/headernotification/headernotificationDirective.js"></script>
+	<script src="header/headernotification/headernotificationController.js"></script>
+
+	<!-- _________________________ACTIVATION_________________________ -->
+	<script src="login/activate/activateController.js"></script>
+
+	<!-- _________________________FORGOT PASSWORD_________________________ -->
+	<script src="login/forgot/forgotController.js"></script>
+
+	<!-- _________________________RESET PASSWORD_________________________ -->
+
+	<script src="login/resetpassword/resetPasswordController.js"></script>
+	<script src="coursedetail/viewcoursedetailController.js"></script>
+	<script src="batchdetails/viewbatchdetailsController.js"></script>
+
+	<!-- _________________________SUPER ADMIN WORKFLOW_________________________ -->
+
+	<script src="superadmin/sa_sidebar/sa_sidebarDirective.js"></script>
+	<script src="superadmin/sa_sidebar/sa_sidebarController.js"></script>
+	<script src="superadmin/sa_dashboard/stats/saStats.js"></script>
+	<script src="superadmin/sa_dashboard/sa_dashboardController.js"></script>
+
+	<!-- _________________________SUPER ADMIN TENANTS________________________ -->
+
+	<script src="superadmin/managetenants/managetenantsController.js"></script>
+	<script src="superadmin/managetenants/addtenant/addtenantController.js"></script>
+	<script src="superadmin/managetenants/managetenantsController.js"></script>
+
+	<!-- _________________________SUPER ADMIN COURSES________________________ -->
+
+	<script src="superadmin/managecourses/managecoursesController.js"></script>
+	<script src="superadmin/managecourses/addcourse/addcourseController.js"></script>
+	<script src="superadmin/managecourses/addcourse/coursedetailsController.js"></script>
+	<script src="superadmin/managecourses/addcourse/coursefilesController.js"></script>
+
+	<!-- _________________________SUPER ADMIN BATCHES________________________ -->
+	
+	<script src="superadmin/managebatches/samanagebatchesController.js"></script>
+	<script src="superadmin/managebatches/sasinglebatchController.js"></script>
+
+	<!-- _________________________SUPER ADMIN GUACD PROFILE________________________ -->
+	<script src="superadmin/manageguac/saguacDProfileController.js"></script>
+	
+	<!-- Tracking -->
+	<script src="superadmin/managevolunteer/samanagevolunteerController.js"></script>
+	<script src="superadmin/managevolunteer/addvolunteer/addvolunteerController.js"></script>
+
+	<!-- _________________________TENANT ADMIN WORKFLOW_________________________ -->
+
+	<script src="tenantadmin/ta_sidebar/ta_sidebarDirective.js"></script>
+	<script src="tenantadmin/ta_sidebar/ta_sidebarController.js"></script>
+	<script src="tenantadmin/ta_dashboard/stats/taStats.js"></script>
+	<script src="tenantadmin/ta_dashboard/ta_dashboardController.js"></script>
+
+	<!-- ________________________TENANT ADMIN STUDENTS___________________________-->
+
+	<script src="tenantadmin/managestudents/managestudentsController.js"></script>
+	<script src="tenantadmin/managestudents/addstudent/addstudentController.js"></script>
+	<script src="tenantadmin/managestudents/importstudents/importstudentsController.js"></script>
+
+	<!-- ________________________TENANT ADMIN COURSES___________________________-->
+	<script src="tenantadmin/viewcourses/viewcoursesController.js"></script>
+
+	<!-- ________________________TENANT ADMIN BATCHES___________________________-->
+
+	<script src="tenantadmin/manageBatches/tamanagebatchesController.js"></script>
+	<script src="tenantadmin/manageBatches/batchdetail/tabatchdetailController.js"></script>
+	<script src="tenantadmin/createbatch/createbatchController.js"></script>
+	
+	<script src="tenantadmin/createbatch/importbatchstudents/importbatchstudentsController.js"></script>
+
+	<!-- ________________________TENANT ADMIN DETAILS___________________________-->
+	<script src="tenantadmin/details/tenantDetailController.js"></script>
+
+	<!-- ________________________TENANT ADMIN REPORTS___________________________-->
+
+	<!-- <script src="tenantadmin/manageReports/tamanagereportsController.js"></script>
+	<script src="tenantadmin/manageReports/viewreports/taviewreportsController.js"></script>
+	<script src="tenantadmin/manageReports/viewreports/taviewbatchreportsController.js"></script> -->
+
+	<!-- _________________________STUDENT WORKFLOW_________________________ -->
+
+	<script src="student/st_sidebar/st_sidebarDirective.js"></script>
+	<script src="student/st_sidebar/st_sidebarController.js"></script>
+	<script src="student/st_dashboard/stats/stStats.js"></script>
+	<script src="student/st_dashboard/st_dashboardController.js"></script>
+
+	<!-- ________________________STUDENT BATCHES___________________________-->
+
+	<script src="student/stbatches/stbatchesController.js"></script>
+	<script src="student/stbatches/stcontinuebatchController.js"></script>
+	<script src="student/viewcourses_stud/viewcourses_studController.js"></script>
+	
+	<!-- ________________________Test___________________________-->
+	<script src="superadmin/test/testController.js"></script>
+	<script src="superadmin/test/companyinfo/companyinfoController.js"></script>
+	
+	<!-- Tracking system -->
+	<!-- _________________________SUPER ADMIN USERS________________________ -->
+	
+	<script src="main/mainController.js"></script>
+
+	<script src="superadmin/manageusers/manageusersController.js"></script>
+	<script src="superadmin/manageusers/adduser/adduserController.js"></script>
+	
+	<!-- SUPER ADMIN ORDERS -->
+	<script src="superadmin/manageorders/manageordersController.js"></script>
+	<script src="superadmin/manageorders/addorder/saAddOrderController.js"></script>
+	
+	<!-- SUPER ADMIN CLIENTS -->
+	<script src="superadmin/manageclients/saManageClientsController.js"></script>
+	<script src="superadmin/manageclients/addclient/saAddClientController.js"></script>
+	
+	<!-- SUPER ADMIN REPORTS -->
+	<script src="superadmin/managereports/managereportsController.js"></script>
+	
+	<!-- ADMIN ORDERS -->
+	<script src="tenantadmin/manageorders/manageordersController.js"></script>
+	<script src="tenantadmin/manageorders/addorder/addorderController.js"></script>
+	
+	<!-- ADMIN CLIENTS -->
+	<script src="tenantadmin/manageclients/manageclientsController.js"></script>
+	<script src="tenantadmin/manageclients/addclient/addclientController.js"></script>
+	
+	<!-- ADMIN REPORTS -->
+	<script src="tenantadmin/managereports/managereportsController.js"></script>
+	
+</body>
+
+</html>

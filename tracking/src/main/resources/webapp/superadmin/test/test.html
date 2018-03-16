@@ -1,0 +1,234 @@
+<style>
+.carousel-control.left {
+    background-color: initial;
+}
+.carousel-control.right {
+    background-color: initial;
+}
+.carousel-indicators {
+	display: none;
+	width: 0%;
+}
+</style>
+<div>
+
+	<div>
+		<carousel interval="carouselTimer"> 
+			<slide ng-repeat="slide in slides" active="slide.active">
+				<img ng-src="{{slide.image}}" style="margin: auto; width: 100%;" ng-click="openNewTabForImage(slide.link)">
+				<!-- <div class="carousel-caption">
+					<h4>{{slide.cap}}</h4>
+				</div> -->
+			</slide>
+		</carousel>
+	</div>
+	<div mass-autocomplete style="text-align: -webkit-center">
+		<div class="form-group input-group" style="width: 50%; margin-top: -50px;">
+			<input type="text" class="form-control" ng-model="dirty.value" mass-autocomplete-item="autocomplete_options" placeholder="Search for Company Name and get instant insights">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div>
+	</div>
+
+	<h2 class="text-center">
+		<label>National Markets</label>
+	</h2>
+
+	<div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Market Internal BSE</h4>
+				<table style="width: 100%;">
+					<tr ng-repeat="market in markets track by $index">
+						<th style="width: 50%;">{{market.title}}</th>
+						<td style="width: 50%;">{{market.value}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-6" style="border-left: 1px solid gainsboro">
+				<h4>Trend</h4>
+				<div class="panel-body">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#nse" data-toggle="tab">NSE</a></li>
+						<li><a href="#bse" data-toggle="tab">BSE</a></li>
+						<li><a href="#gold" data-toggle="tab">Gold</a></li>
+						<li><a href="#oil" data-toggle="tab">Oil</a></li>
+						<li><a href="#inr" data-toggle="tab">INR/USD</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="nse">
+							<h4>NSE</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+								cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.</p>
+						</div>
+						<div class="tab-pane fade" id="bse">
+							<h4>BSE</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+								cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.</p>
+						</div>
+						<div class="tab-pane fade" id="gold">
+							<h4>Gold</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+								cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.</p>
+						</div>
+						<div class="tab-pane fade" id="oil">
+							<h4>Oil</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+								cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.</p>
+						</div>
+						<div class="tab-pane fade" id="inr">
+							<h4>INR/USD</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+								sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+								aute irure dolor in reprehenderit in voluptate velit esse cillum
+								dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+								cupidatat non proident, sunt in culpa qui officia deserunt
+								mollit anim id est laborum.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="row well text-center">
+		<h1>Need insights into the Stock Market?</h1>
+		<h3>Our experts have prepared a custom HEALTH REPORT to guide you!</h3>
+		<button type="button" class="btn btn-primary" ng-click="openNewTab()">Read Now</button>
+	</div>
+
+	<h2>
+		<label>Market Action Today</label>
+	</h2>
+
+	<div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h4 class="text-center">Biggest Movers - Sectors</h4>
+				<table style="width: 100%;">
+					<thead>
+						<tr>
+							<th>Sector</th>
+							<th>Change</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="sector in sectors track by $index">
+						<td style="width: 50%;">{{sector.title}}</td>
+						<td style="width: 50%;color:green" ng-if="sector.value>=0">{{sector.value}}</td>
+						<td style="width: 50%;color:red" ng-if="sector.value<0">{{sector.value}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-6" style="border-left: 1px solid gainsboro">
+				<div class="panel-body">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a href="#gainers" data-toggle="tab">
+								<i class="glyphicon glyphicon-arrow-up" style="color: green"></i>&nbsp;Biggest Gainers
+							</a>
+						</li>
+						<li>
+							<a href="#loosers" data-toggle="tab">
+								Biggest Loosers&nbsp;<i class="glyphicon glyphicon-arrow-down" style="color: red"></i>
+							</a>
+						</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="gainers">
+							<table style="width: 100%;">
+								<thead>
+									<tr>
+										<th>Company</th>
+										<th>Current</th>
+										<th>Change</th>
+									</tr>
+								</thead>
+								<tr ng-repeat="gainer in companyGainers track by $index" ng-if="$index<5">
+									<td style="width: 50%;">{{gainer.name}}</td>
+									<td style="width: 25%;">{{gainer.current}}</td>
+									<td style="width: 25%;color: green;">+{{gainer.value}}%</td>
+								</tr>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="loosers">
+							<table style="width: 100%;">
+								<thead>
+									<tr>
+										<th>Company</th>
+										<th>Current</th>
+										<th>Change</th>
+									</tr>
+								</thead>
+								<tr ng-repeat="looser in companyLoosers track by $index" ng-if="$index<5">
+									<td style="width: 50%;">{{looser.name}}</td>
+									<td style="width: 25%;">{{looser.current}}</td>
+									<td style="width: 25%;color: red;">{{looser.value}}%</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	
+	<div class="row well text-center">
+		<h1>Company of the Day : Adani Ports</h1>
+		<h3>Read a detailed FORENSIC ANALYSIS of the company by our experts!</h3>
+		<button type="button" class="btn btn-primary" ng-click="openNewTab()">Read Now</button>
+	</div>
+	
+	<div class="row text-center">
+		<h1>Best performing Strategies of 2015</h1>
+		<h3>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </h3>
+		<button type="button" class="btn btn-primary" ng-click="openNewTab1()">This YTD</button>
+		<button type="button" class="btn btn-primary" ng-click="openNewTab2()">2 Years</button>
+		<button type="button" class="btn btn-primary" ng-click="openNewTab3()">4 Years</button>
+	</div>
+	<hr>
+	
+	<div class="row text-center">
+		<br><br>
+		<button type="button" class="btn btn-success" ng-click="openNewTab()">Dint find what you are looking for? Write to Us</button>
+		<br><br>
+		<label>Copyright information and more about the company and website information goes here</label>
+	</div>
+
+</div>

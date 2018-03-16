@@ -1,0 +1,58 @@
+<div ng-if="!parent" ui-view></div>
+<div ng-if="parent">
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-male" style="color:#337ab7;"></i>&nbsp; Manage Clients
+			<button class="btn btn-primary pull-right" type="button" ng-click="addNewClient()">
+				<i class="fa fa-plus-circle"></i>&nbsp;
+				New Client
+			</button>
+		</h1>
+	</div>
+	
+	<div class="text-right">
+		
+	</div>
+	
+	<div class="panel panel-info" ng-if="clientsData.length==0">
+   		<div class="panel-heading"> Clients </div>
+   		<div class="panel-body">
+   			<div class="row text-center">
+   				<br>
+   				<h4><label>There are no Clients</label></h4>
+   				<br>
+   			</div>
+   		</div>
+   	</div>
+	
+	<div ng-if="clientsData.length>0">
+		<table id ="manageClientsDataTable" datatable="ng" class="table table-bordered table-striped" >
+			<thead>
+				<tr>
+					<th style="width:40%;text-align:center;">Name</th>
+					<th style="width:30%;text-align:center;">City</th>
+					<th style="width:30%;text-align:center;">Email</th>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="client in clientsData track by $index" class="item">
+					<td style="text-align:center;">{{client.clientName}}</td>
+					<td style="text-align:center;">{{client.city}}</td>
+					<td style="text-align:center;">{{client.email}}</td>
+					<td style="text-align:center;">
+						<button class="btn btn-warning btn-xs" type="button" ng-disabled="tenant.tenantStatus=='0'" ng-click="onEdit(client)">
+							<i class="fa fa-edit"></i>&nbsp;
+							Edit
+						</button>
+						<button class="btn btn-danger btn-xs" type="button" ng-click="onDelete(client)">
+							<i class="fa fa-times-circle-o"></i>&nbsp;
+							Delete
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table> 
+	</div>
+
+</div>

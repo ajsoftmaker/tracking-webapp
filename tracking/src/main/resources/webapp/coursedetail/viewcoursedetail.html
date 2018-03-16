@@ -1,0 +1,150 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-book" style="color:#337ab7;"></i>&nbsp;
+			Course Details
+		</h1>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading"> Details </div>
+		
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-12">
+					<div><label>Description : </label> {{course.description}}</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Course ID :</label></div>
+					<div class="col-lg-7">{{course.courseID}}</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Course Name :</label></div>
+					<div class="col-lg-7">{{course.courseName}}</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Course Type :</label></div>
+					<div class="col-lg-7">{{course.courseType}}</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Lab Type :</label></div>
+					<div class="col-lg-7">{{course.labType}}</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Tech Platform :</label></div>
+					<div class="col-lg-7">{{course.techPlatform}}</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Course Level :</label></div>
+					<div class="col-lg-7">{{course.courseLevel}}</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Maximum Class Size :</label></div>
+					<div class="col-lg-7">{{course.maxClassSize}}</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Setup Time Needed :</label></div>
+					<div class="col-lg-7">{{course.setupTimeDays}} days</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Course Duration :</label></div>
+					<div class="col-lg-7">{{course.durationDays}} days</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="col-lg-5"><label>Customer ID :</label></div>
+					<div class="col-lg-7">{{course.customerID}}</div>
+				</div>
+			</div>
+			
+		</div>	
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading"> Test Details </div>
+		<div class="panel-body" style="overflow:auto;height:14vw;">
+			<div class="row text-center" ng-if="tests.length==0">
+   				<br>
+   				<h4><label>There are no tests for this course</label></h4>
+   				<br>
+   			</div>
+   			
+   			<div class="row" ng-if="tests.length>0">
+				<div class="col-lg-6">
+					<label>Total No Of Tests :</label> {{tests.length}} 
+				</div>
+			</div>
+			
+   			<div ng-if="tests.length>0" ng-repeat="test in tests track by $index">
+   				
+			
+   				<table class="table" >
+   					<thead>
+   						<tr>
+   							<th>{{test.testName}}</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<label>Description&nbsp; : &nbsp;</label>{{test.description}}<br>
+								<label>Verify Script : &nbsp;</label>{{test.verifyScript}}<br>
+								<label>Reset Script : &nbsp;</label>{{test.resetScript}}<br>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+   			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading"> File Details </div>
+		<div class="panel-body" style="overflow:auto;height:14vw;">
+			<div class="row text-center" ng-if="files.length==0">
+   				<br>
+   				<h4><label>There are no files for this course</label></h4>
+   				<br>
+   			</div>
+   			
+   			<div class="row" ng-if="files.length>0">
+				<div class="col-lg-6">
+					<label>Total No Of Files :</label> {{files.length}} 
+				</div>
+			</div>
+			
+   			<div ng-if="files.length>0" ng-repeat="file in files track by $index">
+   				<table class="table" >
+   					<thead>
+   						<tr>
+   							<th>{{file.fileName}}</th>
+   						</tr>
+   					</thead>
+				</table>
+   			</div>
+		</div>
+	</div>
+	
+	<div class="row" style="text-align:center;">
+		<button class="btn btn-success" type="button" ng-click="onBack()">
+			<i class="fa fa-chevron-left"></i>&nbsp;
+			Back
+		</button>
+	</div>
+	
+</div>
+

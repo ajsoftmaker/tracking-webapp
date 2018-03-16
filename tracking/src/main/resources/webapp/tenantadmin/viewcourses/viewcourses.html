@@ -1,0 +1,54 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-book" style="color:#337ab7;"></i>&nbsp;
+			View Courses
+		</h1>
+	</div>
+	
+	<a href="#allcourses" id="allcourses-link" class="link" rel="allcourses" style="text-align:right;">All</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="#favorites" id="favorites-link" class="link" rel="favorites" style="text-align:right;">Favorites</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="#popular" id="popular-link" class="link" rel="popular" style="text-align:right;">Popular</a>
+	<br><br>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading"> {{tableHeading}} </div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="coursesToShow.length==0">
+   				<br>
+   				<h4><label>There are no courses available</label></h4>
+   				<br>
+   			</div>
+   			<div ng-if="coursesToShow.length>0">
+				<table id="taCoursesToShowDataTable" datatable="ng" class="table table-bordered">
+					<thead>
+	            	    <tr>
+	            	        <th data-orderable="false" style="text-align:center;width:20%;">Course ID</th>
+	            	        <th data-orderable="false" style="text-align:center;width:50%;">Course Details</th>
+	            	        <th style="width:30%;"></th>
+	            	    </tr>
+	            	</thead>
+					<tbody>
+						<tr ng-repeat="course in coursesToShow track by $index" class="item">
+							<td><a href="#" ng-click="onView(course.courseID)">{{course.courseID}}</a></td>
+							<td>
+								<label>{{course.courseName}}</label><br>
+								{{course.description}}
+							</td>
+							<td style="text-align:center;">
+								<button class="btn btn-primary btn-sm" type="button" ng-click="onScheduleCourse(course.courseID)">
+									<i class="fa fa-play-circle"></i>&nbsp;
+									Schedule this course
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			      
+		</div>
+	</div>
+	
+</div>
+

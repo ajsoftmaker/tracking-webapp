@@ -1,0 +1,133 @@
+<div>
+	<br>
+	<div class="row page-header">
+		<h1>{{heading}}</h1>
+	</div>
+	
+
+	<form name="addForm">
+		<!-- <div class="panel panel-info">
+			<div class="panel-body"> -->
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="form-group {{tennatNameFeedback}}">
+							<label>Organization Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="1"
+								ng-change="validTenantName(addForm.tenantName.$invalid)"
+								ng-model="tenant.tenantName" name="tenantName"
+								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
+							<div ng-show="tenantNameValid" style="color: red">Please
+								Enter valid Organization Name</div>
+							<span ng-show="tenantNameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantNameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{tennatEmailFeedback}}">
+							<label>Primary Email</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="3" ng-disabled="editMode"
+								ng-change="validPrimaryEmail(addForm.primaryEmail.$invalid)"
+								ng-model="tenant.primaryEmail" name="primaryEmail"
+								ng-maxlength="50" ng-minlength="7"
+								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/"
+								placeholder="eg :(aaa@aa.aaa)" required>
+							<div ng-show="primaryEmailValid" style="color: red">Please
+								Enter valid email ID</div>
+							<span ng-show="tenantEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{tennatPhone1Feedback}}">
+							<label>Phone Number</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="5" type="number"
+								ng-change="validPhone1(addForm.phone1.$invalid)"
+								ng-model="tenant.phone1" name="phone1"  ngMinlength="10" ngMaxlength="10"
+								placeholder="eg :(XXXXXXXXXX) 10 digits  " 
+								ng-pattern="/^\d{10}$/"
+								required>
+							<div ng-show="phone1Valid" style="color: red">Please Enter
+								valid Phone Number</div>
+							<span ng-show="tenantPhone1Success" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantPhone1Error"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{tennatContact1NameFeedback}}">
+							<label>Contact Person Name</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" tabindex="7"
+								ng-change="validContact1Name(addForm.contact1Name.$invalid)"
+								ng-model="tenant.contact1Name" name="contact1Name"
+								ng-pattern="/^[a-zA-Z  ]*$/" required>
+							<div ng-show="contact1NameValid" style="color: red">Please
+								Enter valid Contact Person Name</div>
+							<span ng-show="tenantContact1NameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantContact1NameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="form-group {{tennatCodeFeedback}}">
+							<label>Organization Code</label><label style="color: red">&nbsp*</label>
+							<input class="form-control" ng-disabled="editMode" tabindex="2"
+								ng-change="validTenantCode(addForm.tenantCode.$invalid)"
+								ng-model="tenant.tenantCode" name="tenantCode"
+								ng-pattern="/^[a-zA-Z0-9]*$/" required>
+							<div ng-show="tenantCodeValid" style="color: red">Please
+								Enter valid Organization Code</div>
+							<span ng-show="tenantCodeSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantCodeError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{tenantSecondaryEmailFeedback}}">
+							<label>Secondary Email</label> <input class="form-control"
+								tabindex="4" ng-model="tenant.secondaryEmail"
+								ng-change="validSecondaryEmail(addForm.secondaryEmail.$invalid)"
+								name="secondaryEmail" maxlength="50" minlength="7"
+								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="eg :(aaa@aa.aaa)">
+							<div ng-show="addForm.secondaryEmail.$invalid" style="color: red">Enter
+								valid Secondary email ID</div>
+							<span ng-show="tenantSecondaryEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantSecondaryEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+
+						<div class="form-group {{tennatPhone2Feedback}}">
+							<label>Alternative Phone Number</label> <input
+								class="form-control" tabindex="6" ng-model="tenant.phone2"
+								ng-change="validPhone2(addForm.phone2.$invalid)"
+								name="phone2" type="number" placeholder="eg :(XXXXXXXXXX) 10 digits  " 
+								ng-pattern="/^\d{10}$/"
+								ngMaxlength="10">
+							<span ng-show="tenantPhone2Success" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantPhone2Error"class="glyphicon glyphicon-remove form-control-feedback"></span>
+			
+						</div>
+
+						<div class="form-group {{tennatContact2NameFeedback}}">
+							<label>Alternative Contact Person</label> <input
+								class="form-control" tabindex="7" ng-model="tenant.contact2Name"
+								ng-change="validContact2Name(addForm.contact2Name.$invalid)"
+								name="contact2Name" ng-pattern="/^[a-zA-Z  ]*$/">
+							<span ng-show="tenantContact2NameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+							<span ng-show="tenantContact2NameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+						</div>
+					</div>
+
+					<div class="col-lg-8" ng-hide="addForm.$valid" style="color: red">Enter
+						all mandatory fields marked with *</div>
+
+				</div>
+
+				<div class="row text-center">
+					<button class="btn btn-success" tabindex="8" type="button"
+						ng-disabled="addForm.$invalid" ng-click="addUser()">
+						<i class="fa fa-check"></i>&nbsp; Save
+					</button>
+
+					<button class="btn btn-danger" tabindex="9" type="button"
+						ng-click="cancelAddUser()">
+						<i class="fa fa-times"></i>&nbsp; Cancel
+					</button>
+				</div>
+			<!-- </div>
+		</div> -->
+	</form>
+
+</div>

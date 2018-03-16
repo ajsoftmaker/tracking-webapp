@@ -1,0 +1,39 @@
+
+    <!-- <div class="pull-left" style="position: absolute;" >
+    	<a class="navbar-brand" href="/"><img src="../images/logo-hor-med.png"></a>
+    </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                          <h3 class="panel-title" style="text-align: center"><b>Reset Password</b></h3>
+                    </div>
+                    <div class="panel-body">
+                    <img src="/assets/images/labjump_logo.png" style="text-align: center;margin: 10px;height: 2vw; width: 9vw;">
+                        <form role="form">
+                            <fieldset>
+                            	 <div class="form-group " >
+                                    <input ng-model="username"  placeholder="Login ID" id="username"
+										class="form-control " type="text" required  disabled  />
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="password" placeholder="Password" id="password"
+										class="form-control" type="password" required autofocus />
+                                </div>
+                                <div class="form-group">
+                                	<input ng-model="confpassword" placeholder="Confirm Password"
+										class="form-control" type="password" required />
+								</div>
+								<span ng-show="password !== confpassword" style="color:red">Password mismatch</span>
+                                 <div class="form-group">
+                                 	<input type="submit" ng-click="savePassword()" ng-disabled="password !== confpassword"
+										class="btn btn-block btn-success" value="Reset"/>
+                                </div>
+						</fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

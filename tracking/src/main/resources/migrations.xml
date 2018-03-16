@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="1" author="abhay">
+
+		<!-- _______________________ TENANTS _______________________ -->
+		<!-- ~~~~~~~ -->
+		<createTable tableName="tenants">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tenant_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_code" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_status" type="varchar(5)">
+			</column>
+			<column name="pri_email" type="varchar(255)">
+			</column>
+			<column name="sec_email" type="varchar(255)">
+			</column>
+			<column name="phonenum1" type="varchar(255)">
+			</column>
+			<column name="phonenum2" type="varchar(255)">
+			</column>
+			<column name="contact1_name" type="varchar(255)">
+			</column>
+			<column name="contact2_name" type="varchar(255)">
+			</column>
+			<column name="tenant_logo" type="mediumblob">
+			</column>
+		</createTable>
+
+		<!-- _______________________ COURSES _______________________ -->
+		<!-- ~~~~~~~ -->
+		<createTable tableName="courses">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="course_id" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="course_type" type="varchar(255)">
+			</column>
+			<column name="course_level" type="varchar(255)">
+			</column>
+			<column name="tech_platform" type="varchar(255)">
+			</column>
+			<column name="max_class_size" type="int">
+			</column>
+			<column name="setup_time_days" type="int">
+			</column>
+			<column name="lab_type" type="varchar(255)">
+			</column>
+			<column name="duration_days" type="int">
+			</column>
+			<column name="description" type="text">
+			</column>
+			<column name="customer_id" type="varchar(255)">
+			</column>
+			<column name="no_of_test" type="int">
+			</column>
+		</createTable>
+
+		<!-- _______________________ BATCHES _______________________ -->
+		<!-- ~~~~~~~ -->
+		<createTable tableName="batches">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="batch_name" type="varchar(255)">
+			</column>
+			<column name="state" type="varchar(255)">
+			</column>
+			<column name="num_students" type="int">
+			</column>
+			<column name="start_date" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="end_date" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="setup_status" type="varchar(255)">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="course_id"
+			baseTableName="batches" constraintName="fk_batch_course_id" onDelete="CASCADE"
+			onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="courses" />
+		<addForeignKeyConstraint baseColumnNames="tenant_id"
+			baseTableName="batches" constraintName="fk_batch_tenant_id" onDelete="CASCADE"
+			onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="tenants" />
+
+		<!-- _______________________ STUDENTS _______________________ -->
+		<!-- ~~~~~~~~ -->
+		<createTable tableName="students">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="student_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="student_id" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="varchar(255)">
+			</column>
+			<column name="phonenum" type="varchar(255)">
+			</column>
+			<column name="status" type="varchar(255)">
+			</column>
+			<column name="additional_info" type="text">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="tenant_id"
+			baseTableName="students" constraintName="fk_student_tenant_id" onDelete="CASCADE"
+			onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="tenants" />
+			
+		<!-- _______________________ GUACD_PROFILES _______________________ -->
+		<createTable tableName="guacd_profiles">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="guac_name" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="url" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+
+		<!-- _______________________ STUDENTS_BATCHES _______________________ -->
+		<!-- ~~~~~~~~~~~~~~~~ -->
+		<createTable tableName="students_batches">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="student_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="batch_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="varchar(255)">
+			</column>
+			<column name="pod_name" type="varchar(255)">
+			</column>
+			<column name="pod_id" type="bigint">
+			</column>
+			<column name="guac_profile_id" type="bigint">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="student_id"
+			baseTableName="students_batches" constraintName="fk_student_batch_studentid"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="students" />
+		<addForeignKeyConstraint baseColumnNames="batch_id"
+			baseTableName="students_batches" constraintName="fk_student_batch_batchid"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="batches" />
+		<addForeignKeyConstraint baseColumnNames="guac_profile_id"
+			baseTableName="students_batches" constraintName="fk_guac_profile_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="guacd_profiles"/>
+
+		<!-- _______________________ BATCH_REQUESTS _______________________ -->
+		<!-- ~~~~~~~~~~~~~~ -->
+		<createTable tableName="batch_requests">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="num_students" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="students_id_list" type="text">
+			</column>
+			<column name="start_date" type="varchar(255)">
+			</column>
+			<column name="reason" type="text">
+			</column>
+			<column name="request_status" type="varchar(255)">
+			</column>
+			<column name="creation_date" type="TIMESTAMP">
+			</column>
+			<column name="notification" type="int">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="course_id"
+			baseTableName="batch_requests" constraintName="fk_batchrequest_course_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="courses" />
+		<addForeignKeyConstraint baseColumnNames="tenant_id"
+			baseTableName="batch_requests" constraintName="fk_batchrequest_tenant_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="tenants" />
+
+		<!-- _______________________ FILES _______________________ -->
+		<!-- ~~~~~ -->
+		<createTable tableName="files">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="file_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="mode" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="course_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="course_id"
+			baseTableName="files" constraintName="fk_filecourse_course_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="courses" />
+
+		<!-- _______________________ TESTS _______________________ -->
+		<!-- ~~~~~ -->
+		<createTable tableName="tests">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="test_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="text">
+			</column>
+			<column name="reset_script" type="varchar(255)">
+			</column>
+			<column name="verify_script" type="varchar(255)">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="course_id"
+			baseTableName="tests" constraintName="fk_coursetest_course_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="courses" />
+
+		<!-- _______________________ STUDENTS_TESTS _______________________ -->
+		<!-- ~~~~~~~~~~~~~~ -->
+		<createTable tableName="students_tests">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="student_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="test_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="varchar(255)">
+			</column>
+			<column name="results" type="varchar(255)">
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="student_id"
+			baseTableName="students_tests" constraintName="fk_studenttest_student_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="students" />
+		<addForeignKeyConstraint baseColumnNames="test_id"
+			baseTableName="students_tests" constraintName="fk_studenttest_test_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="tests" />
+
+		<!-- _______________________ TAGS _______________________ -->
+		<!-- ~~~~ -->
+		<createTable tableName="tags">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tag_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<!-- _______________________ COURSE_TAGS _______________________ -->
+		<!-- ~~~~~~~~~~~ -->
+		<createTable tableName="course_tags">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="tag_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="course_id"
+			baseTableName="course_tags" constraintName="fk_coursetag_course_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="courses" />
+		<addForeignKeyConstraint baseColumnNames="tag_id"
+			baseTableName="course_tags" constraintName="fk_coursetag_tag_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="tags" />
+
+		<!-- _______________________ LABJUMPUSERS _______________________ -->
+		<!-- ~~~~~~~~~~~~ -->
+		<createTable tableName="trackingusers">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_loginID" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_pwd" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="user_role" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="tenant_id" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="status" type="varchar(255)">
+			<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="tenant_id"
+			baseTableName="trackingusers" constraintName="fk_trackingusers_tenant_id"
+			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+			referencedTableName="tenants" />
+		
+	</changeSet>
+	
+	<changeSet id="2" author="abhay">
+	<!-- _______________________ COURSE COUNT _______________________ -->
+		
+		<createTable tableName="course_count">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="course_id" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="count"  type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<!-- Tracking Client -->
+		<createTable tableName="clients">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="client_name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="client_street" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="client_landmark" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="client_city" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="client_email" type="varchar(255)">
+			</column>
+			<column name="contact_number" type="varchar(255)">
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,92 @@
+<div>
+	<br>
+		<h1 class="page-header">
+			{{heading}}
+		</h1>
+	
+	
+<form name="addFormStudent">
+	<div class="panel panel-info">
+   		<div class="panel-heading">  </div>
+   		<div class="panel-body">
+   			<div class="row">
+   				<div class="col-lg-6">
+					<div class="form-group {{studentNameFeedback}}">
+						<label>Student Name</label><label style="color:red">&nbsp*</label>
+						<input class="form-control" ng-model="student.studentName" name="studentName" 
+						ng-pattern="/^[a-zA-Z  ]*$/" ng-change="validStudentName(addFormStudent.studentName.$invalid)" required>
+						<div ng-show="studentNameValid" style="color:red">Please Enter valid Student Name</div>
+						<span ng-show="studentNameSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+						<span ng-show="studentNameError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				</div>
+			
+				<div class="col-lg-6">
+					<div class="form-group {{studentIDFeedback}}">
+						<label>Student ID</label><label style="color:red">&nbsp*</label>
+						<input class="form-control" ng-disabled="editMode" ng-model="student.studentID" 
+						name="studentID" ng-pattern="/^[a-zA-Z0-9 -]*$/" 
+						ng-change="validStudentID(addFormStudent.studentID.$invalid)" required>
+						<div ng-show="studentIDValid" style="color:red">Student ID cannot be blank</div>
+						<span ng-show="studentIDSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+						<span ng-show="studentIDError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				</div>
+   			</div>
+   			
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group {{studentEmailFeedback}}">
+						<label>Email</label><label style="color:red">&nbsp*</label>
+						<input class="form-control" ng-disabled="editMode" ng-model="student.eMail" 
+						name="eMail" ng-maxlength="50" ng-minlength="7"
+						ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/" ng-change="valideMail(addFormStudent.eMail.$invalid)" required>
+						<div ng-show="eMailValid" style="color:red">Enter valid email ID</div>
+						<span ng-show="studentEmailSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+						<span ng-show="studentEmailError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				</div>
+			
+				<div class="col-lg-6">
+					<div class="form-group {{studentPhoneNumFeedback}}">
+						<label>Phone Number</label>
+					<input class="form-control" ng-model="student.phoneNum" name="phoneNum"  type="number"
+					 ng-change="validPhoneNum(addFormStudent.phoneNum.$invalid)"
+					 placeholder="eg :(XXXXXXXXXX) 10 digits  "  ng-pattern="/^\d{10}$/" >
+					<div ng-show="addForm.phoneNum.$valid" style="color:red">Phone Number cannot be blank</div>
+					<span ng-show="studentPhoneNumSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+					<span ng-show="studentPhoneNumError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group {{studentAdditionalInfoFeedback}}">
+						<label>Additional Info</label>
+						<input class="form-control" ng-model="student.additionalInfo" name="additionalInfo"
+						ng-change="validAdditionalInfo(addFormStudent.additionalInfo.$invalid)" >
+						<span ng-show="studentAdditionalInfoSuccess" class="glyphicon glyphicon-ok form-control-feedback"></span>
+						<span ng-show="studentAdditionalInfoError"class="glyphicon glyphicon-remove form-control-feedback"></span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-12" ng-hide="addFormStudent.$valid" style="color:red">Enter all mandatory fields marked with *</div>
+			
+			<div class="col-lg-12 text-center">
+				<button class="btn btn-success" type="button" ng-disabled="addFormStudent.$invalid" ng-click="onSave()">
+					<i class="fa fa-check"></i>&nbsp;
+					Save
+				</button>
+				
+				<button class="btn btn-danger" type="button" ng-click="onCancel()">
+					<i class="fa fa-times"></i>&nbsp;
+					Cancel
+				</button>
+			</div>
+   		</div>
+   	</div>
+</form>
+	
+</div>

@@ -1,0 +1,37 @@
+ <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                          <h3 class="panel-title" style="text-align: center"><b>Choose an option for Login</b></h3>
+                    </div>
+                    <div class="panel-body">
+                    	<img src="/assets/images/labjump_logo.png" style="text-align: center;margin: 10px;height: 2vw; width: 9vw;">
+                        <form role="form">
+                            <fieldset>
+                            	 <div class="form-group">
+                                  <ul>
+                            	<br>
+                            	<label class="radio-inline">
+    							<input type="radio" ng-model="roles.name" value="tenantadmin">
+   								 Admin
+   								 </label>
+   								 <br>
+   								 <label class="radio-inline">
+    							<input type="radio" ng-model="roles.name" value="student">
+   								 Student
+   								 </label>
+   								 </ul>
+                           	   </div>
+                            
+                                 <div class="form-group">
+                                 	<input type="submit" ng-click="onLogin()" ng-disabled="roles.name.length==0"
+										class="btn btn-block btn-success" value="Submit"/>
+                                </div>
+						</fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

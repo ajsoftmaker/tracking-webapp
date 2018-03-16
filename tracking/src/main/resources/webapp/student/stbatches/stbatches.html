@@ -1,0 +1,121 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			<i class="fa fa-group" style="color: #337ab7;"></i>&nbsp; Registered Courses
+		</h1>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Ongoing</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="ongoingcourses.length==0">
+				<br>
+				<h4>
+					<label>You do not have any ongoing courses.</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="ongoingcourses.length>0">
+				<table id="stOngoingcoursesDataTable" datatable="ng" class="table table-bordered" dt-options>
+					<thead>
+						<tr>
+							<th data-orderable="false" class="text-center">Course ID</th>
+							<th data-orderable="false" class="text-center">Course
+								Details</th>
+							<th data-orderable="false"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="course in ongoingcourses track by $index"
+							class="item page-header">
+							<td class="text-center">{{course.courseID}}</td>
+							<td>{{course.courseName}} <br> From &nbsp;
+								{{course.startDate}} &nbsp; to &nbsp; {{course.endDate}} <br>
+								{{course.courseDescription}}
+							</td>
+							<td class="text-center">
+								<button class="btn btn-primary btn-sm" type="button"
+									ng-if="course.status==''" ng-click="onContinueCourse(course)">
+									<i class="fa fa-play-circle-o"></i>&nbsp; Start this course
+								</button>
+								<button class="btn btn-primary btn-sm" type="button"
+									ng-if="course.status!=''" ng-click="onContinueCourse(course)">
+									<i class="fa fa-play-circle-o"></i>&nbsp; Continue this course
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading">Upcoming</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="nextWeekCourses.length==0">
+				<br>
+				<h4>
+					<label>You are not registered for any upcoming courses</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="nextWeekCourses.length>0">
+				<table id="stNextWeekCoursesDataTable" datatable="ng" class="table table-bordered" dt-options>
+					<thead>
+						<tr>
+							<th data-orderable="false" class="text-center">Course ID</th>
+							<th data-orderable="false" class="text-center">Course
+								Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="nextWeekCourse in nextWeekCourses track by $index"
+							class="item">
+							<td class="text-center">{{nextWeekCourse.courseID}}</td>
+							<td>{{nextWeekCourse.courseName}} <br> 
+								From &nbsp; {{nextWeekCourse.startDate}} &nbsp; to &nbsp; {{nextWeekCourse.endDate}} <br>
+								{{nextWeekCourse.courseDescription}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">Done Earlier</div>
+		<div class="panel-body">
+			<div class="row text-center" ng-if="doneCourses.length==0">
+				<br>
+				<h4>
+					<label>No courses done earlier</label>
+				</h4>
+				<br>
+			</div>
+			<div ng-if="doneCourses.length>0">
+				<table id="stDoneCoursesDataTable" datatable="ng" class="table table-bordered" dt-options>
+					<thead>
+						<tr>
+							<th data-orderable="false" class="text-center">Course ID</th>
+							<th data-orderable="false" class="text-center">Course
+								Details</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="doneCourse in doneCourses track by $index"
+							class="item">
+							<td class="text-center">{{doneCourse.courseID}}</td>
+							<td>{{doneCourse.courseName}} <br> 
+								From &nbsp; {{doneCourse.startDate}} &nbsp; to &nbsp; {{doneCourse.endDate}} <br>
+								{{doneCourse.courseDescription}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,96 @@
+<div>
+	<div class="row">
+		<h1 class="page-header">
+			Batch Details
+		</h1>
+	</div>
+
+	<div class="panel panel-info">
+		<div class="panel-heading"> </div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-5">
+					<label>Course ID : &nbsp;</label>{{course.courseID}}
+				</div>
+				<div class="col-lg-5">
+					<label>Course Name : &nbsp;</label>{{course.courseName}}
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-5">
+					<label>Company Name : &nbsp;</label>{{tenant.tenantName}}
+				</div>
+				<div class="col-lg-5">
+					<label>Date : &nbsp;</label>{{batch.startDate}} &nbsp; to &nbsp; {{batch.endDate}}
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<label>Status : &nbsp;</label>{{batch.batchState}}
+				</div>
+				<div class="col-lg-12" ng-show="cancelBatch">
+					<button class="btn btn-danger" type="button" ng-click="cancelBatchSuperAdmin()">
+						<i class="fa fa-times"></i>&nbsp;
+						Cancel this batch
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading"> Lab Assignments </div>
+		<div class="panel-body">
+			<div class="row" ng-if="batch.batchState=='Setup Pending'">
+				<div class="col-lg-12 form-inline">
+					Guacamole Profile : 
+					<select  ng-model="selectedProfile" ng-options="guacamoleProfile.guacName for guacamoleProfile in guacamoleProfiles"
+						class="form-control" ng-required="true" ng-change=onSelectProfile(selectedProfile)>
+					</select>		
+				</div>
+				<br>
+				<br>
+				<div class="col-lg-12 form-inline">
+					Assign single pod to
+					<select class="form-control" ng-model="podCount" style="width:7%" value="2">
+						<option value="1">1 </option>
+						<option value="2">2 </option>
+					</select>
+					students		
+					<button class="btn btn-success" type="button" ng-click="onAssign(podCount)">
+						<i class="fa fa-check"></i>&nbsp;
+						Assign
+					</button>
+				</div>
+			</div>
+			<br>
+			
+			<div class="row">
+				<table style="width:100%;" class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width:20%;text-align:center;">Name</th>
+							<th style="width:20%;text-align:center;">Email</th>
+							<th style="width:20%;text-align:center;">Assignment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students track by $index" class="item">
+							<td style="text-align:center;">{{student.studentName}}</td>
+							<td style="text-align:center;">{{student.eMail}}</td>
+							<td style="text-align:center;">{{student.podName}}</td>
+						</tr>
+					</tbody>
+				</table> 
+			</div>
+			
+			<button class="btn btn-success pull-right" type="button" ng-if="assign" ng-click="onSaveAssignment()">
+				<i class="fa fa-check"></i>&nbsp;
+				Save this assignment
+			</button>
+		</div>
+	</div>
+	
+</div>

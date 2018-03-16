@@ -1,0 +1,157 @@
+<div>
+	<br>
+	<h1>
+		Import Students 
+		<a class="btn btn-primary pull-right" type="button" ng-click="" href="assets/labjump/student.csv" ng-show="step1"> 
+			<i class="fa fa-download"></i>&nbsp; Download sample CSV file
+		</a>
+	</h1>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">{{step}}</div>
+		<div class="panel-body">
+			<div id="step1" ng-show="step1">
+				<form name="uploadForm">
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group">
+								<input type="file" on-read-file="showContent($fileContent)" accept=".csv">
+							</div>
+						</div>
+						<div class="row">
+							<button class="btn btn-success" type="button" ng-disabled="upload" ng-click="onUpload()">
+								<i class="fa fa-upload"></i>&nbsp; Read File
+							</button>
+							<button class="btn btn-danger" type="button" ng-click="onCancel()">
+								<i class="fa fa-times"></i>&nbsp; Cancel
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div id="step2" ng-show="!step1" style="width: 100%;">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						Invalid Entires ({{studentDuplicate.length}})
+					</div>
+					<div class="panel-body">
+						<div class="row text-center" ng-if="studentDuplicate.length==0">
+							<br>
+							<h4>
+								<label>There are no conflicting records</label>
+							</h4>
+							<br>
+						</div>
+						<table id = "taStudentDuplicateDataTable" datatable="ng" class="table table-bordered table-striped" style="width: 100%;" ng-if="studentDuplicate.length>0">
+							<thead>
+								<tr>
+									<th style="width: 30%; text-align: center;">Name</th>
+									<th style="width: 30%; text-align: center;">Student ID</th>
+									<th style="width: 40%; text-align: center;">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="student in studentDuplicate track by $index"
+									class="item">
+									<td style="text-align: center;">{{student.studentName}}</td>
+									<td style="text-align: center;">{{student.studentID}}</td>
+									<td style="text-align: center;">{{student.error}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						New Students Found ({{studentImport.length}})
+					</div>
+					<div class="panel-body">
+						<div class="row text-center" ng-if="studentImport.length==0">
+							<br>
+							<h4>
+								<label>There are valid student records to be imported</label>
+							</h4>
+							<br>
+						</div>
+
+						<div style="width: 100%;" ng-if="studentImport.length>0">
+							<div>
+								<label> 
+									<input type="checkbox" ng-model="checkImportbox.value" ng-change="onClickImport()"> 
+									Import students register for batch
+								</label>
+							</div>
+							<br>
+
+							<table id= "taStudentImportDataTable" datatable="ng" class="table table-bordered table-striped" style="width: 100%;">
+								<thead>
+									<tr>
+										<th style="width: 30%; text-align: center;">Name</th>
+										<th style="width: 30%; text-align: center;">Student ID</th>
+										<th style="width: 40%; text-align: center;">Email ID</th>
+										<th style="width: 40%; text-align: center;">Phone Number</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="student in studentImport track by $index" class="item">
+										<td style="text-align: center;">{{student.studentName}}</td>
+										<td style="text-align: center;">{{student.studentID}}</td>
+										<td style="text-align: center;">{{student.eMail}}</td>
+										<td style="text-align: center;">{{student.phoneNum}}</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						Students To Be Registered ({{students.length}})
+					</div>
+					<div class="panel-body">
+						<div class="row text-center" ng-if="students.length==0">
+							<br>
+							<h4>
+								<label>There are no registered students</label>
+							</h4>
+							<br>
+						</div>
+						<table id = "taStudents1DataTable" datatable="ng" class="table table-bordered table-striped" style="width: 100%;" ng-if="students.length>0">
+							<thead>
+								<tr>
+									<th style="width: 30%; text-align: center;">Name</th>
+									<th style="width: 30%; text-align: center;">Student ID</th>
+									<th style="width: 40%; text-align: center;">Email ID</th>
+									<th style="width: 40%; text-align: center;">Phone Number</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="student in students track by $index" class="item">
+									<td style="text-align: center;">{{student.studentName}}</td>
+									<td style="text-align: center;">{{student.studentID}}</td>
+									<td style="text-align: center;">{{student.eMail}}</td>
+									<td style="text-align: center;">{{student.phoneNum}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="row" style="text-align: center;">
+					<hr>
+					<button class="btn btn-success" type="button" ng-click="onImportRequest()" ng-disabled="!requestMode">
+						<i class="fa fa-check"></i>&nbsp; Request
+					</button>
+					<button class="btn btn-danger" type="button" ng-click="onImportCancel()">
+						<i class="fa fa-times"></i>&nbsp; Cancel
+					</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Welcome Super Admin</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<a ui-sref="home.samanagetenants"><sa_stats number={{numTenants}}
+				comments="Users" colour="primary" type="users"></sa_stats></a> <a
+			ui-sref="home.samanagecourses"><sa_stats number={{numCourses}}
+				comments="Orders" colour="green" type="truck"></sa_stats></a> <a
+			ui-sref="home.samanagebatches"><sa_stats number={{numBatches}}
+				comments="Clients" colour="yellow" type="male"></sa_stats></a>
+		<sa_stats number={{numStudents}} comments="Profile" colour="red"
+			type="laptop"></sa_stats>
+	</div>
+
+	<h3 class="row text-center blink_me" ng-hide="notification">
+		<a href="#" ng-click="requestBatch()" class="text-danger">New Batch Request!</a>
+	</h3>
+	
+</div>
