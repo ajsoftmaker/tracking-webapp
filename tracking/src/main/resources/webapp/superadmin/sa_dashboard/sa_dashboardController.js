@@ -10,11 +10,11 @@ function saDashboardController($scope, $rootScope, $state, dialogs, restAPIServi
 	$scope.numStudents = 0;
 	$scope.notification = true;
 	$rootScope.fromNotification = false;
-	getAllTenants();
-	getAllCourses();
-	getAllBatches();
-	getAllStudents();
-	getAllBatchRequests();
+//	getAllTenants();
+//	getAllCourses();
+//	getAllBatches();
+//	getAllStudents();
+//	getAllBatchRequests();
 	
 	function blinker() {
 	    $('.blink_me').fadeOut(500);

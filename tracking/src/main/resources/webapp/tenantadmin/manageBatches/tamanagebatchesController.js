@@ -10,7 +10,7 @@ function tamanagebatchesController($scope, $rootScope, $state, $filter, dialogs,
 	$scope.batchesDone = [];
 	$scope.batchesOnGoing = [];
 	
-	 $timeout(function () {
+	$timeout(function () {
 		 if($scope.batcheRequests.length < 10) {
 			 $('#taBatcheRequestsDataTable_paginate').attr("style","display:none;");
 		 }
@@ -147,4 +147,4 @@ function tamanagebatchesController($scope, $rootScope, $state, $filter, dialogs,
 		  var p = s.split('-');
 		  return new Date(p[2], months[p[1].toLowerCase()], p[0]);
 		}
-}
+	}

@@ -14,7 +14,7 @@ function manageordersController($scope, $rootScope, $state, dialogs,
 		 }
     }, 1000);
 	
-	getBatches();
+//	getBatches();
 //	getTenants();
 	
 	function getTenants() {

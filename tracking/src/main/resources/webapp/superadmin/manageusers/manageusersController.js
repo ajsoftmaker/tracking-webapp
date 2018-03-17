@@ -15,8 +15,8 @@ function manageusersController($scope, $rootScope, $state, dialogs,
 		 }
     }, 1000);
 	
-	getBatches();
-	getTenants();
+//	getBatches();
+//	getTenants();
 	
 	function getTenants() {
 		var promise1 = restAPIService.tenantsService().query();

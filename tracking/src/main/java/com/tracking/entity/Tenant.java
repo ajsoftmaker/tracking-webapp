@@ -48,7 +48,16 @@ public class Tenant {
 
 	@Column(name = "contact2_name")
 	private String contact2Name;
-
+	
+	@Column(name = "street")
+	private String street;
+	
+	@Column(name = "landmark")
+	private String landmark;
+	
+	@Column(name = "city")
+	private String city;
+	
 	@Column(name = "tenant_logo")
 	private byte[] tenantLogo;
 
@@ -130,6 +139,30 @@ public class Tenant {
 
 	public void setContact2Name(String contact2Name) {
 		this.contact2Name = contact2Name;
+	}
+	
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public byte[] getTenantLogo() {

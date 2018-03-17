@@ -126,9 +126,9 @@ function config($stateProvider, $urlRouterProvider) {
 	})
 	
 	.state('home.samanageorders', {
-		templateUrl : 'superadmin/manageorders/manageorders.html',
+		templateUrl : 'superadmin/manageorders/samanageorders.html',
 		url : '/samanageorders',
-		controller : "manageordersController"
+		controller : "samanageordersController"
 	}).state('home.samanageorders.saaddorder', {
 		templateUrl : 'superadmin/manageorders/addorder/saAddorder.html',
 		url : '/saddorder',

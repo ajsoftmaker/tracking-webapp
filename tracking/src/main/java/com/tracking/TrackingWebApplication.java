@@ -18,20 +18,10 @@ import com.tracking.db.StudentDAO;
 import com.tracking.db.StudentTestsDAO;
 import com.tracking.db.TenantDAO;
 import com.tracking.db.TestDAO;
-import com.tracking.entity.Batch;
-import com.tracking.entity.BatchRequest;
-import com.tracking.entity.Course;
-import com.tracking.entity.CourseCount;
-import com.tracking.entity.CourseTests;
-import com.tracking.entity.Files;
-import com.tracking.entity.GuacDProflie;
-import com.tracking.entity.TrackingTag;
+import com.tracking.entity.Client;
+import com.tracking.entity.Order;
 import com.tracking.entity.TrackingUser;
-import com.tracking.entity.Student;
-import com.tracking.entity.StudentBatches;
-import com.tracking.entity.StudentTests;
 import com.tracking.entity.Tenant;
-import com.tracking.entity.Test;
 import com.tracking.health.TemplateHealthCheck;
 import com.tracking.resources.BatchRequestResource;
 import com.tracking.resources.BatchRequestsResource;
@@ -78,10 +68,12 @@ import io.dropwizard.views.ViewBundle;
 
 public class TrackingWebApplication extends Application<TrackingWebConfiguration> {
 	private final HibernateBundle<TrackingWebConfiguration> hibernateBundle = 
-            new HibernateBundle<TrackingWebConfiguration>(Batch.class, BatchRequest.class, 
-            		Course.class, CourseTests.class, Files.class, GuacDProflie.class,
-            		TrackingTag.class, Student.class, StudentBatches.class, 
-            		StudentTests.class, Tenant.class, Test.class ,TrackingUser.class ,CourseCount.class){
+            new HibernateBundle<TrackingWebConfiguration>(Client.class, Order.class, 
+            		Tenant.class, TrackingUser.class){
+//		Batch.class, BatchRequest.class, 
+//		Course.class, CourseTests.class, Files.class, GuacDProflie.class,
+//		TrackingTag.class, Student.class, StudentBatches.class, 
+//		StudentTests.class, Tenant.class, Test.class ,TrackingUser.class ,CourseCount.class
            
 				@Override
 				public PooledDataSourceFactory getDataSourceFactory(TrackingWebConfiguration configuration) {
@@ -145,79 +137,79 @@ public class TrackingWebApplication extends Application<TrackingWebConfiguration
 
 	private void registerLabJumpResources(TrackingWebConfiguration configuration,Environment environment) {
 		final TrackingUserDAO ljuserDAO = new TrackingUserDAO(hibernateBundle.getSessionFactory());
-		final FileDAO fileDAO = new FileDAO(hibernateBundle.getSessionFactory());
-		final StudentDAO studentDAO = new StudentDAO(hibernateBundle.getSessionFactory());
+//		final FileDAO fileDAO = new FileDAO(hibernateBundle.getSessionFactory());
+//		final StudentDAO studentDAO = new StudentDAO(hibernateBundle.getSessionFactory());
 		final TenantDAO tenantDAO = new TenantDAO(hibernateBundle.getSessionFactory());
-		final BatchRequestDAO batchRequestDAO = new BatchRequestDAO(hibernateBundle.getSessionFactory());
-		final CourseDAO courseDAO = new CourseDAO(hibernateBundle.getSessionFactory());
-		final BatchDAO batchDAO = new BatchDAO(hibernateBundle.getSessionFactory());
-		final StudentBatchesDAO studentBatchesDAO = new StudentBatchesDAO(hibernateBundle.getSessionFactory());
-		final TestDAO testDAO = new TestDAO(hibernateBundle.getSessionFactory());
-		final StudentTestsDAO studentTestsDAO = new StudentTestsDAO(hibernateBundle.getSessionFactory());
-		final GuacDProfileDAO guacDProflieDAO = new GuacDProfileDAO(hibernateBundle.getSessionFactory());
-		final CourseCountDAO courseCountDAO = new CourseCountDAO(hibernateBundle.getSessionFactory());
+//		final BatchRequestDAO batchRequestDAO = new BatchRequestDAO(hibernateBundle.getSessionFactory());
+//		final CourseDAO courseDAO = new CourseDAO(hibernateBundle.getSessionFactory());
+//		final BatchDAO batchDAO = new BatchDAO(hibernateBundle.getSessionFactory());
+//		final StudentBatchesDAO studentBatchesDAO = new StudentBatchesDAO(hibernateBundle.getSessionFactory());
+//		final TestDAO testDAO = new TestDAO(hibernateBundle.getSessionFactory());
+//		final StudentTestsDAO studentTestsDAO = new StudentTestsDAO(hibernateBundle.getSessionFactory());
+//		final GuacDProfileDAO guacDProflieDAO = new GuacDProfileDAO(hibernateBundle.getSessionFactory());
+//		final CourseCountDAO courseCountDAO = new CourseCountDAO(hibernateBundle.getSessionFactory());
 		final LoginResource loginRes = new LoginResource(configuration.getAdminuser(), configuration.getAdminpwd(), ljuserDAO);
 		environment.jersey().register(loginRes);
 		
-		final CoursesResource coursesResource = new CoursesResource(courseDAO ,testDAO , studentTestsDAO,tenantDAO);
-		environment.jersey().register(coursesResource);
-		final CourseResource courseResource = new CourseResource(courseDAO, configuration.getCoursefileslocation() ,fileDAO ,tenantDAO);
-		environment.jersey().register(courseResource);
+//		final CoursesResource coursesResource = new CoursesResource(courseDAO ,testDAO , studentTestsDAO,tenantDAO);
+//		environment.jersey().register(coursesResource);
+//		final CourseResource courseResource = new CourseResource(courseDAO, configuration.getCoursefileslocation() ,fileDAO ,tenantDAO);
+//		environment.jersey().register(courseResource);
 		
-		final BatchesResource batchesRes = new BatchesResource(batchDAO);
-		environment.jersey().register(batchesRes);
-		final BatchResource batchRes = new BatchResource(batchDAO);
-		environment.jersey().register(batchRes);
+//		final BatchesResource batchesRes = new BatchesResource(batchDAO);
+//		environment.jersey().register(batchesRes);
+//		final BatchResource batchRes = new BatchResource(batchDAO);
+//		environment.jersey().register(batchRes);
 		
-		final BatchRequestResource batchRequestRes = new BatchRequestResource(batchRequestDAO ,courseDAO ,tenantDAO);
-		environment.jersey().register(batchRequestRes);
-		final BatchRequestsResource batchRequestsRes = new BatchRequestsResource(batchRequestDAO ,courseDAO,tenantDAO);
-		environment.jersey().register(batchRequestsRes);
+//		final BatchRequestResource batchRequestRes = new BatchRequestResource(batchRequestDAO ,courseDAO ,tenantDAO);
+//		environment.jersey().register(batchRequestRes);
+//		final BatchRequestsResource batchRequestsRes = new BatchRequestsResource(batchRequestDAO ,courseDAO,tenantDAO);
+//		environment.jersey().register(batchRequestsRes);
 				
-		final StudentsResource studentsResource = new StudentsResource(studentDAO, tenantDAO, ljuserDAO);
-		environment.jersey().register(studentsResource);
-		final StudentResource studentResource = new StudentResource(studentDAO, ljuserDAO);
-		environment.jersey().register(studentResource);
+//		final StudentsResource studentsResource = new StudentsResource(studentDAO, tenantDAO, ljuserDAO);
+//		environment.jersey().register(studentsResource);
+//		final StudentResource studentResource = new StudentResource(studentDAO, ljuserDAO);
+//		environment.jersey().register(studentResource);
 		
-		final StudentBatchesResource studentBatchesResource = new StudentBatchesResource(studentBatchesDAO);
-		environment.jersey().register(studentBatchesResource);
-		final StudentBatchResource studentBatchResource = new StudentBatchResource(studentBatchesDAO);
-		environment.jersey().register(studentBatchResource);
+//		final StudentBatchesResource studentBatchesResource = new StudentBatchesResource(studentBatchesDAO);
+//		environment.jersey().register(studentBatchesResource);
+//		final StudentBatchResource studentBatchResource = new StudentBatchResource(studentBatchesDAO);
+//		environment.jersey().register(studentBatchResource);
 		
-		final StudentTestsResource studentTestsResource = new StudentTestsResource(studentTestsDAO ,studentDAO);
-		environment.jersey().register(studentTestsResource);
-		final StudentTestResource studentTestResource = new StudentTestResource(studentTestsDAO);
-		environment.jersey().register(studentTestResource);
+//		final StudentTestsResource studentTestsResource = new StudentTestsResource(studentTestsDAO ,studentDAO);
+//		environment.jersey().register(studentTestsResource);
+//		final StudentTestResource studentTestResource = new StudentTestResource(studentTestsDAO);
+//		environment.jersey().register(studentTestResource);
 		
-		final TenantResource tenantResource = new TenantResource(tenantDAO, ljuserDAO, studentDAO);
-		environment.jersey().register(tenantResource);
-		final TenantsResource tenantsResource = new TenantsResource(tenantDAO,ljuserDAO);
-		environment.jersey().register(tenantsResource);
+//		final TenantResource tenantResource = new TenantResource(tenantDAO, ljuserDAO, studentDAO);
+//		environment.jersey().register(tenantResource);
+//		final TenantsResource tenantsResource = new TenantsResource(tenantDAO,ljuserDAO);
+//		environment.jersey().register(tenantsResource);
 		
-		final FilesResource filesResource = new FilesResource(fileDAO);
-		environment.jersey().register(filesResource);
-		final FileResource fileResource = new FileResource(fileDAO);
-		environment.jersey().register(fileResource);
+//		final FilesResource filesResource = new FilesResource(fileDAO);
+//		environment.jersey().register(filesResource);
+//		final FileResource fileResource = new FileResource(fileDAO);
+//		environment.jersey().register(fileResource);
 		
 		
-		final GuacDProfilesResource guacDProfilesResource = new GuacDProfilesResource(guacDProflieDAO);
-		environment.jersey().register(guacDProfilesResource);
-		final GuacDProfileResource guacDProfileResource = new GuacDProfileResource(guacDProflieDAO);
-		environment.jersey().register(guacDProfileResource);
+//		final GuacDProfilesResource guacDProfilesResource = new GuacDProfilesResource(guacDProflieDAO);
+//		environment.jersey().register(guacDProfilesResource);
+//		final GuacDProfileResource guacDProfileResource = new GuacDProfileResource(guacDProflieDAO);
+//		environment.jersey().register(guacDProfileResource);
 		
-		final TestsResource testsResource = new TestsResource(testDAO);
-		environment.jersey().register(testsResource);
-		final TestResource testResource = new TestResource(testDAO);
-		environment.jersey().register(testResource);
-		final TrackingUsersResource labJumpUserResource = new TrackingUsersResource(ljuserDAO, tenantDAO, studentDAO);
-		environment.jersey().register(labJumpUserResource);
+//		final TestsResource testsResource = new TestsResource(testDAO);
+//		environment.jersey().register(testsResource);
+//		final TestResource testResource = new TestResource(testDAO);
+//		environment.jersey().register(testResource);
+//		final TrackingUsersResource labJumpUserResource = new TrackingUsersResource(ljuserDAO, tenantDAO, studentDAO);
+//		environment.jersey().register(labJumpUserResource);
 		
-		final TestScriptResource testScriptResource = new TestScriptResource();
-		environment.jersey().register(testScriptResource);
+//		final TestScriptResource testScriptResource = new TestScriptResource();
+//		environment.jersey().register(testScriptResource);
 		
 		environment.jersey().register(MultiPartFeature.class);
 		
-		final CourseCountResource courseCountResourse = new CourseCountResource(courseCountDAO);
-		environment.jersey().register(courseCountResourse);
+//		final CourseCountResource courseCountResourse = new CourseCountResource(courseCountDAO);
+//		environment.jersey().register(courseCountResourse);
 	}
 }
