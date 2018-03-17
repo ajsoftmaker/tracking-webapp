@@ -127,7 +127,7 @@
           <transformers>
             <transformer />
             <transformer>
-              <mainClass>com.tracking.TrackingWebApplication</mainClass>
+              <mainClass>com.labjump.LabJumpWebApplication</mainClass>
             </transformer>
           </transformers>
         </configuration>
