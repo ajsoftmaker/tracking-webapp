@@ -117,7 +117,7 @@
 			<column name="order_to" type="bigint">
 				<constraints nullable="false" />
 			</column>
-			<column name="trackingusers_id" type="bigint">
+			<column name="tenant_id" type="bigint">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
@@ -129,10 +129,10 @@
 			baseTableName="orders" constraintName="fk_clients_to"
 			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
 			referencedTableName="clients" />
-		<addForeignKeyConstraint baseColumnNames="trackingusers_id"
-			baseTableName="orders" constraintName="fk_trackingusers_id"
+		<addForeignKeyConstraint baseColumnNames="tenant_id"
+			baseTableName="orders" constraintName="fk_tenant_id"
 			onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
-			referencedTableName="trackingusers" />
+			referencedTableName="tenants" />
 		
 		
 	</changeSet>

@@ -8,10 +8,12 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import com.tracking.auth.TrackingAuthenticator;
 import com.tracking.db.BatchDAO;
 import com.tracking.db.BatchRequestDAO;
+import com.tracking.db.ClientDAO;
 import com.tracking.db.CourseCountDAO;
 import com.tracking.db.CourseDAO;
 import com.tracking.db.FileDAO;
 import com.tracking.db.GuacDProfileDAO;
+import com.tracking.db.OrderDAO;
 import com.tracking.db.TrackingUserDAO;
 import com.tracking.db.StudentBatchesDAO;
 import com.tracking.db.StudentDAO;
@@ -27,6 +29,7 @@ import com.tracking.resources.BatchRequestResource;
 import com.tracking.resources.BatchRequestsResource;
 import com.tracking.resources.BatchResource;
 import com.tracking.resources.BatchesResource;
+import com.tracking.resources.ClientsResource;
 import com.tracking.resources.CourseCountResource;
 import com.tracking.resources.GuacDProfileResource;
 import com.tracking.resources.GuacDProfilesResource;
@@ -36,6 +39,7 @@ import com.tracking.resources.FileResource;
 import com.tracking.resources.FilesResource;
 import com.tracking.resources.TrackingUsersResource;
 import com.tracking.resources.LoginResource;
+import com.tracking.resources.OrdersResource;
 import com.tracking.resources.StudentBatchResource;
 import com.tracking.resources.StudentBatchesResource;
 import com.tracking.resources.StudentResource;
@@ -151,6 +155,14 @@ public class TrackingWebApplication extends Application<TrackingWebConfiguration
 		final LoginResource loginRes = new LoginResource(configuration.getAdminuser(), configuration.getAdminpwd(), ljuserDAO);
 		environment.jersey().register(loginRes);
 		
+		final ClientDAO clientDAO = new ClientDAO(hibernateBundle.getSessionFactory());
+		final ClientsResource clientsResource = new ClientsResource(clientDAO);
+		environment.jersey().register(clientsResource);
+		
+		final OrderDAO orderDAO = new OrderDAO(hibernateBundle.getSessionFactory());
+		final OrdersResource ordersResource = new OrdersResource(orderDAO);
+		environment.jersey().register(ordersResource);
+		
 //		final CoursesResource coursesResource = new CoursesResource(courseDAO ,testDAO , studentTestsDAO,tenantDAO);
 //		environment.jersey().register(coursesResource);
 //		final CourseResource courseResource = new CourseResource(courseDAO, configuration.getCoursefileslocation() ,fileDAO ,tenantDAO);
@@ -183,8 +195,8 @@ public class TrackingWebApplication extends Application<TrackingWebConfiguration
 		
 //		final TenantResource tenantResource = new TenantResource(tenantDAO, ljuserDAO, studentDAO);
 //		environment.jersey().register(tenantResource);
-//		final TenantsResource tenantsResource = new TenantsResource(tenantDAO,ljuserDAO);
-//		environment.jersey().register(tenantsResource);
+		final TenantsResource tenantsResource = new TenantsResource(tenantDAO,ljuserDAO);
+		environment.jersey().register(tenantsResource);
 		
 //		final FilesResource filesResource = new FilesResource(fileDAO);
 //		environment.jersey().register(filesResource);

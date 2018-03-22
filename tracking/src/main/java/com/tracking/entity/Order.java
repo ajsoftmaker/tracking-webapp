@@ -12,7 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orders")
 @NamedQueries({ @NamedQuery(name = "com.tracking.entity.Order.findAll", query = "SELECT o FROM Order o"),
-		@NamedQuery(name = "com.tracking.entity.Order.findById", query = "SELECT o FROM Order o where o.id = :id")})
+@NamedQuery(name = "com.tracking.entity.Order.findById", query = "SELECT o FROM Order o where o.id = :id"),
+@NamedQuery(name = "com.tracking.entity.Order.findAllByTenantId", query = "SELECT o FROM Order o where o.tenantId = tenantId")})
 
 public class Order {
 
@@ -41,8 +42,8 @@ public class Order {
 	@Column(name = "order_to")
 	private long orderTo;
 	
-	@Column(name = "trackingusers_id")
-	private long trackingusers_id;
+	@Column(name = "tenant_id")
+	private long tenantId;
 	
 	public long getId() {
 		return id;
@@ -108,12 +109,12 @@ public class Order {
 		this.orderTo = orderTo;
 	}
 
-	public long getTrackingusers_id() {
-		return trackingusers_id;
+	public long getTenantId() {
+		return tenantId;
 	}
 
-	public void setTrackingusers_id(long trackingusers_id) {
-		this.trackingusers_id = trackingusers_id;
-	}
+	public void setTenantId(long tenantId) {
+		this.tenantId = tenantId;
+	}	
 
 }

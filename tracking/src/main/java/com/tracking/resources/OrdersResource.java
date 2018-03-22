@@ -12,9 +12,11 @@ import javax.ws.rs.core.Response.Status;
 import com.google.gson.JsonObject;
 import com.tracking.db.TrackingUserDAO;
 import com.tracking.db.ClientDAO;
+import com.tracking.db.OrderDAO;
 import com.tracking.db.TenantDAO;
 import com.tracking.entity.TrackingUser;
 import com.tracking.entity.Client;
+import com.tracking.entity.Order;
 import com.tracking.entity.Tenant;
 import com.tracking.utils.JsonUtils;
 import com.tracking.utils.MailUtils;
@@ -24,41 +26,41 @@ import com.tracking.utils.Utils;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 
-@Path("/clients")
+@Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
-public class ClientsResource {
+public class OrdersResource {
 	
-	private final ClientDAO clientDAO;
-	private final Logger logger = Logger.getLogger(ClientsResource.class.getName());
+	private final OrderDAO orderDAO;
+	private final Logger logger = Logger.getLogger(OrdersResource.class.getName());
 
-	public ClientsResource(ClientDAO clientDAO) {
-		this.clientDAO = clientDAO;
+	public OrdersResource(OrderDAO orderDAO) {
+		this.orderDAO = orderDAO;
 	}
 
 	@GET
 	@UnitOfWork
-	public Response listClients(@Auth TrackingUser authUser) {
+	public Response listOrders(@Auth TrackingUser authUser) {
 		try {
-			logger.info(" In listClients");
-			return Response.status(Status.OK).entity(JsonUtils.getJson(clientDAO.findAll())).build();
+			logger.info(" In list Orders");
+			return Response.status(Status.OK).entity(JsonUtils.getJson(orderDAO.findAll())).build();
 		} catch (Exception e) {
-			logger.severe("Unable to Find List of Clients " + e);
-			return Response.status(Status.BAD_REQUEST).entity(JsonUtils.getErrorJson("Unable to Find List of Clients"))
+			logger.severe("Unable to Find List of Orders " + e);
+			return Response.status(Status.BAD_REQUEST).entity(JsonUtils.getErrorJson("Unable to Find List of Orders"))
 					.build();
 		}
 	}
 
 	@POST
 	@UnitOfWork
-	public Response createClient(@Auth TrackingUser auth, Client client) {
+	public Response createOrder(@Auth TrackingUser auth, Order order) {
 		Response response = null;
 		try {
-			logger.info(" In createClient");
-			return Response.status(Status.OK).entity(JsonUtils.getJson(clientDAO.create(client))).build();
+			logger.info(" In create Order");
+			return Response.status(Status.OK).entity(JsonUtils.getJson(orderDAO.create(order))).build();
 
 		} catch (Exception e) {
-			logger.severe("Unable to Create Client " + e);
-			return Response.status(Status.BAD_REQUEST).entity(JsonUtils.getErrorJson("Unable to Create Client"))
+			logger.severe("Unable to Create Order " + e);
+			return Response.status(Status.BAD_REQUEST).entity(JsonUtils.getErrorJson("Unable to Create Order"))
 					.build();
 		}
 	}

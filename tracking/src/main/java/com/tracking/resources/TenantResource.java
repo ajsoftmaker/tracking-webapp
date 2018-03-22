@@ -82,7 +82,7 @@ public class TenantResource {
 	@UnitOfWork
 	public Response updateTenant(@Auth TrackingUser authUser , Tenant tenant) {
 		try {
-			logger.info(" In updateTenant");
+			logger.info(" In update Tenant");
 			if(authUser.getId() == 0) {
 				TrackingUser userObj = userDAO.findByEmailWithRole(tenant.getPrimaryEmail(), TrackingUser.TENANTADMIN);
 			// if there is change in the status (enabled/disabled)

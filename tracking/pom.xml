@@ -286,7 +286,7 @@
 							implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>com.labjump.LabJumpWebApplication</mainClass>
+							<mainClass>com.tracking.TrackingWebApplication</mainClass>
 						</transformer>
 					</transformers>
 				</configuration>
