@@ -5,7 +5,7 @@ angular.module('trackingWebApp')
 
 function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$location){
 //	Tracking
-
+//console.log($rootScope);
 	$scope.fromClientNameValid = false;
 	$scope.fromClientNameSuccess = false;
 	$scope.fromClientNameError = false;
@@ -38,18 +38,19 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.fromClient={
 			clientName : "",
-			street : "",
-			landmark : "",
-			city : "",
-			email : "",
+			clientStreet : "",
+			clientLandmark : "",
+			clientCity : "",
+			clientEmail : "",
 			contactNumber : ""
 	}
 	
 	$scope.order={
-			status : "In transit",
-			type : "Document",
-			weightMode : "kg"
+			orderStatus : "In transit",
+			orderType : "Document",
+			orderWeightMode : "kg"
 	};
+	
 	
 	$scope.toClientNameValid = false;
 	$scope.toClientNameSuccess = false;
@@ -83,10 +84,10 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.toClient={
 			clientName : "",
-			street : "",
-			landmark : "",
-			city : "",
-			email : "",
+			clientStreet : "",
+			clientLandmark : "",
+			clientCity : "",
+			clientEmail : "",
 			contactNumber : ""
 	}
 	
@@ -112,9 +113,36 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 		$scope.editMode = false;
 	}
 	
-	$scope.addClient = function() {
+	$scope.saveClient = function(client) {
+		console.log(client)
+		var promise = restAPIService.clientsService().save(null,client);
+		promise.$promise.then(
+				function (response) {
+					
+				},
+				function (error) {
+					dialogs.error("Error", error.data.error, {'size': 'sm' });
+				}
+		);
+	};
+	
+	$scope.findClient = function(email) {
+//		console.log("In Function");
+		var promise = restAPIService.clientEmailService(email).get();
+		promise.$promise.then(
+			function (response) {
+//				console.log(response);
+//				return response;
+		    },
+		    function(error){
+		    	dialogs.error("Error", error.data.error, {'size': 'sm' });
+		    }
+		);
+	};
+	
+	$scope.addOrder = function() {
 		if($scope.mode=="edit"){
-			var promise = restAPIService.tenantService($scope.tenant.id).update($scope.tenant);
+			var promise = restAPIService.tenantService($scope.tenant.id).update($scope.order);
 			promise.$promise.then(
 					function (response) {
 						dialogs.notify("Success", response.success, {'size': 'sm' });
@@ -125,7 +153,92 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 				    }
 				);
 		}else{
-			var promise = restAPIService.tenantsService().save(null,$scope.tenant);
+//			$scope.order.orderFrom = "";
+//			$scope.order.orderTo = "";
+			//From Client Data
+			var promise = restAPIService.clientEmailService($scope.fromClient.clientEmail).get();
+			promise.$promise.then(
+				function (response) {
+					console.log(response.id)
+					$scope.fromClient = response;
+					$scope.order.orderFrom = response.id;
+			    },
+			    function(error){
+			    	dialogs.error("Error", error.data.error, {'size': 'sm' });
+			    }
+			);
+			
+//			console.log($scope.order.orderFrom)
+			if($scope.order.orderFrom==undefined){
+				promise = restAPIService.clientsService().save(null,$scope.fromClient);
+				promise.$promise.then(
+						function (response) {
+							
+						},
+						function (error) {
+							dialogs.error("Error", error.data.error, {'size': 'sm' });
+						}
+				);
+				
+				promise = restAPIService.clientEmailService($scope.fromClient.clientEmail).get();
+				promise.$promise.then(
+					function (response) {
+						$scope.fromClient = response;
+				    },
+				    function(error){
+				    	dialogs.error("Error", error.data.error, {'size': 'sm' });
+				    }
+				);
+			}
+			$scope.order.orderFrom = $scope.fromClient.id;
+			
+			//To Client Data
+			promise = restAPIService.clientEmailService($scope.toClient.clientEmail).get();
+			promise.$promise.then(
+				function (response) {
+					$scope.toClient = response;
+			    },
+			    function(error){
+			    	dialogs.error("Error", error.data.error, {'size': 'sm' });
+			    }
+			);
+			$scope.order.orderTo = null;
+			console.log($scope.order.orderTo)
+			if($scope.order.orderTo == null){
+				console.log("save")
+				console.log($scope.toClient)
+//				promise = restAPIService.clientsService().save(null,$scope.toClient);
+				promise = restAPIService.clientsService().save(null,$scope.toClient);
+				promise.$promise.then(
+					function (response) {
+//						dialogs.notify("Success", response.success, {'size': 'sm' });
+//						$state.reload();
+					},
+					function (error) {
+						dialogs.error("Error", error.data.error, {'size': 'sm' });
+					}
+				);
+
+				console.log("save find")
+				console.log($scope.toClient)
+				promise = restAPIService.clientEmailService($scope.toClient.clientEmail).get();
+				promise.$promise.then(
+					function (response) {
+						$scope.toClient = response;
+//						$scope.order.orderTo = response.id;
+				    },
+				    function(error){
+				    	dialogs.error("Error", error.data.error, {'size': 'sm' });
+				    }
+				);
+			}
+			console.log("save find")
+			console.log($scope.toClient)
+			
+			$scope.order.orderTo = $scope.toClient.id;
+			console.log($scope.order)
+			//Order Save
+			promise = restAPIService.ordersService().save(null,$scope.order);
 			promise.$promise.then(
 					function (response) {
 						dialogs.notify("Success", response.success, {'size': 'sm' });
@@ -162,8 +275,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validFromClientEmail = function(valid){
 		$scope.fromClientEmailValid = valid;
-		if($scope.fromClient.email != undefined) {
-			if($scope.fromClient.email.length <= 0) {
+		if($scope.fromClient.clientEmail != undefined) {
+			if($scope.fromClient.clientEmail.length <= 0) {
 				$scope.fromClientNameError = true;
 				$scope.fromClientEmailFeedback = "has-error has-feedback";
 			} else {
@@ -202,8 +315,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validFromStreet = function(valid){
 		$scope.fromClientStreetValid = valid;
-		if($scope.fromClient.street != undefined) {
-			if($scope.fromClient.street.length <= 0) {
+		if($scope.fromClient.clientStreet != undefined) {
+			if($scope.fromClient.clientStreet.length <= 0) {
 				$scope.fromClientStreetError = true;
 				$scope.fromClientStreetFeedback = "has-error has-feedback";
 			} else {
@@ -220,8 +333,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validFromLandmark = function(valid){
 		$scope.fromClientLandmarkValid = valid;
-		if($scope.fromClient.landmark != undefined) {
-			if($scope.fromClient.landmark.length <= 0) {
+		if($scope.fromClient.clientLandmark != undefined) {
+			if($scope.fromClient.clientLandmark.length <= 0) {
 				$scope.fromClientLandmarkSuccess = false;
 				$scope.fromClientLandmarkError = true;
 				$scope.fromClientLandmarkFeedback = "has-error has-feedback";
@@ -239,8 +352,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validFromCity = function(valid){
 		$scope.fromClientCityValid = valid;
-		if($scope.fromClient.city != undefined) {
-			if($scope.fromClient.city.length <= 0) {
+		if($scope.fromClient.clientCity != undefined) {
+			if($scope.fromClient.clientCity.length <= 0) {
 				$scope.fromClientCitySuccess = false;
 				$scope.fromClientCityError = true;
 				$scope.fromClientCityFeedback = "has-error has-feedback";
@@ -248,7 +361,7 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 				$scope.fromClientCitySuccess = true;
 				$scope.fromClientCityError = false;
 				$scope.fromClientCityFeedback = "has-success has-feedback";
-				$scope.order.location=$scope.fromClient.city
+				$scope.order.orderLocation=$scope.fromClient.clientCity
 				$scope.validLocation(valid);
 			}
 		} else {
@@ -278,8 +391,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validToClientEmail = function(valid){
 		$scope.toClientEmailValid = valid;
-		if($scope.toClient.email != undefined) {
-			if($scope.toClient.email.length <= 0) {
+		if($scope.toClient.clientEmail != undefined) {
+			if($scope.toClient.clientEmail.length <= 0) {
 				$scope.toClientNameError = true;
 				$scope.toClientEmailFeedback = "has-error has-feedback";
 			} else {
@@ -318,8 +431,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validToStreet = function(valid){
 		$scope.toClientStreetValid = valid;
-		if($scope.toClient.street != undefined) {
-			if($scope.toClient.street.length <= 0) {
+		if($scope.toClient.clientStreet != undefined) {
+			if($scope.toClient.clientStreet.length <= 0) {
 				$scope.toClientStreetError = true;
 				$scope.toClientStreetFeedback = "has-error has-feedback";
 			} else {
@@ -336,8 +449,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validToLandmark = function(valid){
 		$scope.toClientLandmarkValid = valid;
-		if($scope.toClient.landmark != undefined) {
-			if($scope.toClient.landmark.length <= 0) {
+		if($scope.toClient.clientLandmark != undefined) {
+			if($scope.toClient.clientLandmark.length <= 0) {
 				$scope.toClientLandmarkSuccess = false;
 				$scope.toClientLandmarkError = true;
 				$scope.toClientLandmarkFeedback = "has-error has-feedback";
@@ -355,8 +468,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validToCity = function(valid){
 		$scope.toClientCityValid = valid;
-		if($scope.toClient.city != undefined) {
-			if($scope.toClient.city.length <= 0) {
+		if($scope.toClient.clientCity != undefined) {
+			if($scope.toClient.clientCity.length <= 0) {
 				$scope.toClientCitySuccess = false;
 				$scope.toClientCityError = true;
 				$scope.toClientCityFeedback = "has-error has-feedback";
@@ -374,8 +487,8 @@ function saAddOrderController($scope,$rootScope,$state,dialogs,restAPIService,$l
 	
 	$scope.validLocation = function(valid){
 		$scope.locationValid = valid;
-		if($scope.order.location != undefined) {
-			if($scope.order.location.length <= 0) {
+		if($scope.order.orderLocation != undefined) {
+			if($scope.order.orderLocation.length <= 0) {
 				$scope.locationSuccess = false;
 				$scope.locationError = true;
 				$scope.orderLocationFeedback = "has-error has-feedback";

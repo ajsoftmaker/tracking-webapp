@@ -38,10 +38,10 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	
 	$scope.client={
 			clientName : "",
-			street : "",
-			landmark : "",
-			city : "",
-			email : "",
+			clientStreet : "",
+			clientLandmark : "",
+			clientCity : "",
+			clientEmail : "",
 			contactNumber : ""
 	}
 	
@@ -49,14 +49,13 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 		$scope.heading = "Edit Client";
 		$scope.editMode = true;
 		var id = Number($scope.id);
-		var promise1 = restAPIService.tenantService(id).get();
+		var promise1 = restAPIService.clientService(id).get();
+//		var promise1 = restAPIService.clientEmailService('aj@a.com').get();
 		promise1.$promise.then(
 			function (response) {
-				$scope.tenant=response;
-				$scope.tenantRePassword = $scope.tenant.tenantPassword
-				$scope.tenant.phone1 = Number($scope.tenant.phone1)
-				if($scope.tenant.phone2)
-					$scope.tenant.phone2 = Number($scope.tenant.phone2)
+				console.log(response)
+				$scope.client=response;
+				$scope.client.contactNumber = Number($scope.client.contactNumber);
 		    },
 		    function(error){
 		    	dialogs.error("Error", error.data.error, {'size': 'sm' });
@@ -68,8 +67,9 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	}
 	
 	$scope.addClient = function() {
+		$scope.client.contactNumber = $scope.client.contactNumber + "";
 		if($scope.mode=="edit"){
-			var promise = restAPIService.tenantService($scope.tenant.id).update($scope.tenant);
+			var promise = restAPIService.tenantService($scope.tenant.id).update($scope.client);
 			promise.$promise.then(
 					function (response) {
 						dialogs.notify("Success", response.success, {'size': 'sm' });
@@ -80,7 +80,8 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 				    }
 				);
 		}else{
-			var promise = restAPIService.tenantsService().save(null,$scope.tenant);
+			console.log("in Add ",$scope.client)
+			var promise = restAPIService.clientsService().save(null,$scope.client);
 			promise.$promise.then(
 					function (response) {
 						dialogs.notify("Success", response.success, {'size': 'sm' });
@@ -117,8 +118,8 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	
 	$scope.validClientEmail = function(valid){
 		$scope.clientEmailValid = valid;
-		if($scope.client.email != undefined) {
-			if($scope.client.email.length <= 0) {
+		if($scope.client.clientEmail != undefined) {
+			if($scope.client.clientEmail.length <= 0) {
 				$scope.clientNameError = true;
 				$scope.clientEmailFeedback = "has-error has-feedback";
 			} else {
@@ -157,8 +158,8 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	
 	$scope.validStreet = function(valid){
 		$scope.clientStreetValid = valid;
-		if($scope.client.street != undefined) {
-			if($scope.client.street.length <= 0) {
+		if($scope.client.clientStreet != undefined) {
+			if($scope.client.clientStreet.length <= 0) {
 				$scope.clientStreetError = true;
 				$scope.clientStreetFeedback = "has-error has-feedback";
 			} else {
@@ -175,8 +176,8 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	
 	$scope.validLandmark = function(valid){
 		$scope.clientLandmarkValid = valid;
-		if($scope.client.landmark != undefined) {
-			if($scope.client.landmark.length <= 0) {
+		if($scope.client.clientLandmark != undefined) {
+			if($scope.client.clientLandmark.length <= 0) {
 				$scope.clientLandmarkSuccess = false;
 				$scope.clientLandmarkError = true;
 				$scope.clientLandmarkFeedback = "has-error has-feedback";
@@ -194,8 +195,8 @@ function saAddClientController($scope,$rootScope,$state,dialogs,restAPIService,$
 	
 	$scope.validCity = function(valid){
 		$scope.clientCityValid = valid;
-		if($scope.client.city != undefined) {
-			if($scope.client.city.length <= 0) {
+		if($scope.client.clientCity != undefined) {
+			if($scope.client.clientCity.length <= 0) {
 				$scope.clientCitySuccess = false;
 				$scope.clientCityError = true;
 				$scope.clientCityFeedback = "has-error has-feedback";

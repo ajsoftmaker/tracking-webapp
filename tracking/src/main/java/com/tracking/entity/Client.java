@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "clients")
 @NamedQueries({ @NamedQuery(name = "com.tracking.entity.Client.findAll", query = "SELECT c FROM Client c"),
 		@NamedQuery(name = "com.tracking.entity.Client.findById", query = "SELECT c FROM Client c where c.id = :id"),
-		@NamedQuery(name = "com.tracking.entity.Client.findByEmailPhone", query = "SELECT c FROM Client c where c.clientEmail = :clientEmail OR c.contactNumber = :contactNumber")})
+		@NamedQuery(name = "com.tracking.entity.Client.findByEmail", query = "SELECT c FROM Client c where c.clientEmail = :clientEmail")})
 
 public class Client {
 

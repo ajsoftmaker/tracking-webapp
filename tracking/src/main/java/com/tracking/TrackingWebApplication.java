@@ -5,53 +5,14 @@ import java.util.Map;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
-import com.tracking.auth.TrackingAuthenticator;
-import com.tracking.db.BatchDAO;
-import com.tracking.db.BatchRequestDAO;
-import com.tracking.db.ClientDAO;
-import com.tracking.db.CourseCountDAO;
-import com.tracking.db.CourseDAO;
-import com.tracking.db.FileDAO;
-import com.tracking.db.GuacDProfileDAO;
-import com.tracking.db.OrderDAO;
-import com.tracking.db.TrackingUserDAO;
-import com.tracking.db.StudentBatchesDAO;
-import com.tracking.db.StudentDAO;
-import com.tracking.db.StudentTestsDAO;
-import com.tracking.db.TenantDAO;
-import com.tracking.db.TestDAO;
 import com.tracking.entity.Client;
 import com.tracking.entity.Order;
-import com.tracking.entity.TrackingUser;
 import com.tracking.entity.Tenant;
-import com.tracking.health.TemplateHealthCheck;
-import com.tracking.resources.BatchRequestResource;
-import com.tracking.resources.BatchRequestsResource;
-import com.tracking.resources.BatchResource;
-import com.tracking.resources.BatchesResource;
-import com.tracking.resources.ClientsResource;
-import com.tracking.resources.CourseCountResource;
-import com.tracking.resources.GuacDProfileResource;
-import com.tracking.resources.GuacDProfilesResource;
-import com.tracking.resources.CourseResource;
-import com.tracking.resources.CoursesResource;
-import com.tracking.resources.FileResource;
-import com.tracking.resources.FilesResource;
-import com.tracking.resources.TrackingUsersResource;
+import com.tracking.entity.TrackingUser;
+import com.tracking.resources.ClientResource;
 import com.tracking.resources.LoginResource;
-import com.tracking.resources.OrdersResource;
-import com.tracking.resources.StudentBatchResource;
-import com.tracking.resources.StudentBatchesResource;
-import com.tracking.resources.StudentResource;
-import com.tracking.resources.StudentTestResource;
-import com.tracking.resources.StudentTestsResource;
-import com.tracking.resources.StudentsResource;
 import com.tracking.resources.TenantResource;
 import com.tracking.resources.TenantsResource;
-import com.tracking.resources.TestResource;
-import com.tracking.resources.TestScriptResource;
-import com.tracking.resources.TestsResource;
-
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
@@ -156,12 +117,16 @@ public class TrackingWebApplication extends Application<TrackingWebConfiguration
 		environment.jersey().register(loginRes);
 		
 		final ClientDAO clientDAO = new ClientDAO(hibernateBundle.getSessionFactory());
+		final ClientResource clientResource = new ClientResource(clientDAO);
+		environment.jersey().register(clientResource);
 		final ClientsResource clientsResource = new ClientsResource(clientDAO);
 		environment.jersey().register(clientsResource);
 		
 		final OrderDAO orderDAO = new OrderDAO(hibernateBundle.getSessionFactory());
 		final OrdersResource ordersResource = new OrdersResource(orderDAO);
 		environment.jersey().register(ordersResource);
+		final OrderResource orderResource = new OrderResource(orderDAO);
+		environment.jersey().register(orderResource);
 		
 //		final CoursesResource coursesResource = new CoursesResource(courseDAO ,testDAO , studentTestsDAO,tenantDAO);
 //		environment.jersey().register(coursesResource);
@@ -193,8 +158,8 @@ public class TrackingWebApplication extends Application<TrackingWebConfiguration
 //		final StudentTestResource studentTestResource = new StudentTestResource(studentTestsDAO);
 //		environment.jersey().register(studentTestResource);
 		
-//		final TenantResource tenantResource = new TenantResource(tenantDAO, ljuserDAO, studentDAO);
-//		environment.jersey().register(tenantResource);
+		final TenantResource tenantResource = new TenantResource(tenantDAO, ljuserDAO);
+		environment.jersey().register(tenantResource);
 		final TenantsResource tenantsResource = new TenantsResource(tenantDAO,ljuserDAO);
 		environment.jersey().register(tenantsResource);
 		

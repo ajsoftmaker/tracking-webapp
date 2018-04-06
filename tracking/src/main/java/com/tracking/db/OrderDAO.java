@@ -24,8 +24,8 @@ public class OrderDAO extends AbstractDAO<Order> {
 		return response;
 	}
 
-	public Order update(Order client) {
-		return persist(client);
+	public Order update(Order order) {
+		return persist(order);
 	}
 
 	public Order findById(long id) {

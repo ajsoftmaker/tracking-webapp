@@ -1,7 +1,7 @@
 <div>
 	<br>
 	<div class="row page-header">
-		<h1>{{heading}}</h1>
+		<h1>{{heading}}</h1>{{client}}{{mode}}
 	</div>
 	
 
@@ -25,7 +25,7 @@
 							<label>Email</label><label style="color: red">&nbsp*</label>
 							<input class="form-control" tabindex="3" ng-disabled="editMode"
 								ng-change="validClientEmail(addForm.email.$invalid)"
-								ng-model="client.email" name="email"
+								ng-model="client.clientEmail" name="email"
 								ng-maxlength="50" ng-minlength="7"
 								ng-pattern="/^[a-z]+[a-z0-9._+]+@[a-z]+\.[a-z.]{2,5}$/"
 								placeholder="eg :(aaa@aa.aaa)" required>
@@ -55,7 +55,7 @@
 							<label>Street/Building Name</label><label style="color: red">&nbsp*</label>
 							<input class="form-control" ng-disabled="editMode" tabindex="2"
 								ng-change="validStreet(addForm.clientStreet.$invalid)"
-								ng-model="client.street" name="street"
+								ng-model="client.clientStreet" name="street"
 								ng-pattern="/^[a-zA-Z0-9  ]*$/" required>
 							<div ng-show="clientStreetValid" style="color: red">Please
 								Enter valid Street/Building Name</div>
@@ -67,7 +67,7 @@
 							<label>Landmark</label><label style="color: red">&nbsp*</label> 
 							<input class="form-control" tabindex="7"
 								ng-change="validLandmark(addForm.landmark.$invalid)"
-								ng-model="client.landmark" name="landmark"
+								ng-model="client.clientLandmark" name="landmark"
 								ng-pattern="/^[a-zA-Z  ]*$/" required>
 							<div ng-show="clientLandmarkValid" style="color: red">
 								Please Enter valid landmark</div>
@@ -79,7 +79,7 @@
 							<label>City</label><label style="color: red">&nbsp*</label> 
 							<input class="form-control" tabindex="7"
 								ng-change="validCity(addForm.city.$invalid)"
-								ng-model="client.city" name="city"
+								ng-model="client.clientCity" name="city"
 								ng-pattern="/^[a-zA-Z  ]*$/" required>
 							<div ng-show="clientCityValid" style="color: red">
 								Please Enter valid landmark</div>

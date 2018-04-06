@@ -35,13 +35,11 @@ import io.dropwizard.hibernate.UnitOfWork;
 public class TenantResource {
 	private final TenantDAO tenantDAO;
 	private final TrackingUserDAO userDAO;
-	private final StudentDAO studentDAO;
 	private final Logger logger = Logger.getLogger(TenantResource.class.getName());
 
-	public TenantResource(TenantDAO dao, TrackingUserDAO userDAO, StudentDAO studentDAO) {
+	public TenantResource(TenantDAO dao, TrackingUserDAO userDAO) {
 		this.tenantDAO = dao;
 		this.userDAO = userDAO;
-		this.studentDAO = studentDAO;
 	}
 
 	@GET
@@ -99,9 +97,6 @@ public class TenantResource {
 							user.setStatus(tenant.getTenantStatus());
 							userDAO.update(user);
 					// now update the student's entry in the students table
-							Student student = studentDAO.findByEmail(user.getEmail());
-							student.setStudentStatus(tenant.getTenantStatus());
-							studentDAO.update(student);
 						}
 						return Response.status(Status.OK).entity(JsonUtils.getSuccessJson("Tenant updated successfully"))
 						.build();

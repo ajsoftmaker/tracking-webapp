@@ -6,7 +6,6 @@ angular.module('trackingWebApp').controller('managetenantsController',
 function managetenantsController($scope, $rootScope, $state, dialogs,
 		restAPIService, $location,$timeout) {
 	$scope.tenantsData = [];
-	$scope.batchData = [];
 	$scope.parent = true;
 	
 	 $timeout(function () {
@@ -15,7 +14,6 @@ function managetenantsController($scope, $rootScope, $state, dialogs,
 		 }
     }, 1000);
 	
-	getBatches();
 	getTenants();
 	
 	function getTenants() {
@@ -25,16 +23,7 @@ function managetenantsController($scope, $rootScope, $state, dialogs,
 		}, function(error) {
 			dialogs.error("Error", error.data.error, {'size' : 'sm'});
 		});
-	}
-
-	function getBatches() {
-		var promise1 = restAPIService.batchesService().query();
-		promise1.$promise.then(function(response) {
-			$scope.batchData = response;
-		}, function(error) {
-			dialogs.error("Error", error.data.error, {'size' : 'sm'});
-		});
-	}
+	}	
 
 	$scope.onEdit = function(tenant) {
 		$scope.parent = false;

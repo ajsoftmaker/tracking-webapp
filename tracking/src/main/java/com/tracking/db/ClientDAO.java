@@ -20,7 +20,8 @@ public class ClientDAO extends AbstractDAO<Client> {
 
 	public Response create(Client client) {
 		Response response = null;
-		Client getTenant = findByEmailPhone(client.getClientEmail(),client.getContactNumber());
+		System.out.println("IN DAO");
+		Client getTenant = findByEmail(client.getClientEmail());
 		if (getTenant != null) {
 			response = Response.notModified("A client with this code already exists").build();
 		} else {
@@ -30,10 +31,14 @@ public class ClientDAO extends AbstractDAO<Client> {
 		return response;
 	}
 
-	private Client findByEmailPhone(String clientEmail, String contactNumber) {
-		return uniqueResult(
-				namedQuery("com.tracking.entity.Client.findByEmailPhone").setParameter("clientEmail", clientEmail)
+	public Client findByEmailPhone(String clientEmail, String contactNumber) {
+		return uniqueResult(namedQuery("com.tracking.entity.Client.findByEmailPhone")
+				.setParameter("clientEmail", clientEmail)
 				.setParameter("contactNumber", contactNumber));
+	}
+	
+	public Client findByEmail(String clientEmail) {
+		return uniqueResult(namedQuery("com.tracking.entity.Client.findByEmail").setParameter("clientEmail", clientEmail));
 	}
 
 	public Client update(Client client) {

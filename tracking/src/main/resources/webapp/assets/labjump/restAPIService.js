@@ -7,6 +7,12 @@ function restAPIService($resource, $rootScope, $http) {
 	return {
 		loginService : loginService,
 		superAdminService : superAdminService,
+		ordersService : ordersService,
+		orderService : orderService,
+		clientsService : clientsService,
+		clientService : clientService,
+		clientEmailService : clientEmailService,
+		
 		coursesService : coursesService,
 		getPassOrFailByCoursesService : getPassOrFailByCoursesService,
 		popularCoursesService : popularCoursesService,
@@ -69,6 +75,31 @@ function restAPIService($resource, $rootScope, $http) {
 		return $resource(url);
 	}
 
+	function ordersService() {
+		var url = $rootScope.apiUrl + "orders";
+		return $resource(url);
+	}
+	
+	function orderService() {
+		var url = $rootScope.apiUrl + "order";
+		return $resource(url);
+	}
+	
+	function clientsService() {
+		var url = $rootScope.apiUrl + "clients";
+		return $resource(url);
+	}
+	
+	function clientService(id) {
+		var url = $rootScope.apiUrl + "client/"+id;
+		return $resource(url);
+	}
+	
+	function clientEmailService(email) {
+		var url = $rootScope.apiUrl + "client/email/"+email;
+		return $resource(url);
+	}
+	
 	function coursesService() {
 		var url = $rootScope.apiUrl + "courses";
 		return $resource(url);

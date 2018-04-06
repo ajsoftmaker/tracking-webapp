@@ -152,23 +152,6 @@ public class TrackingWebConfiguration extends Configuration {
 		this.mailPassword = mailPassword;
 	}
 
-	@JsonProperty("coursefileslocation")
-	public String getCoursefileslocation() {
-		return coursefileslocation;
-	}
-
-	@JsonProperty("coursefileslocation")
-	public void setCoursefileslocation(String coursefileslocation) {
-		this.coursefileslocation = coursefileslocation;
-	}
-
-	public String getGucamoleurl() {
-		return gucamoleurl;
-	}
-
-	public void setGucamoleurl(String gucamoleurl) {
-		this.gucamoleurl = gucamoleurl;
-	}
 
 	public String getVerify() {
 		return verify;

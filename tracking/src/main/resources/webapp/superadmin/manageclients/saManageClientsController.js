@@ -12,10 +12,22 @@ function saManageClientsController($scope, $rootScope, $state, dialogs,
 			 $('#manageClientsDataTable_paginate').attr("style","display:none;");
 		 }
     }, 1000);
+	 
+	 getClients();
+		
+		function getClients() {
+			var promise1 = restAPIService.clientsService().query();
+			promise1.$promise.then(function(response) {
+				$scope.clientsData = response; 
+			}, function(error) {
+				dialogs.error("Error", error.data.error, {'size' : 'sm'});
+			});
+		}
 
 	$scope.onEdit = function(client) {
 		$scope.parent = false;
 		$scope.mode = "edit";
+		console.log(client.id);
 		$scope.id = client.id;
 		$state.go("home.samanageclients.saaddclient");
 	}

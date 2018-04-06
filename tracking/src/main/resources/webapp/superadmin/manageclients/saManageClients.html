@@ -29,19 +29,20 @@
 		<table id ="manageClientsDataTable" datatable="ng" class="table table-bordered table-striped" >
 			<thead>
 				<tr>
-					<th style="width:40%;text-align:center;">Name</th>
-					<th style="width:30%;text-align:center;">City</th>
-					<th style="width:30%;text-align:center;">Email</th>
-					</th>
+					<th style="width:20%;text-align:center;">Name</th>
+					<th style="width:20%;text-align:center;">City</th>
+					<th style="width:20%;text-align:center;">Email</th>
+					<th style="width:20%;text-align:center;"></th>
+					
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="client in clientsData track by $index" class="item">
 					<td style="text-align:center;">{{client.clientName}}</td>
-					<td style="text-align:center;">{{client.city}}</td>
-					<td style="text-align:center;">{{client.email}}</td>
+					<td style="text-align:center;">{{client.clientCity}}</td>
+					<td style="text-align:center;">{{client.clientEmail}}</td>
 					<td style="text-align:center;">
-						<button class="btn btn-warning btn-xs" type="button" ng-disabled="tenant.tenantStatus=='0'" ng-click="onEdit(client)">
+						<button class="btn btn-warning btn-xs" type="button" ng-disabled="" ng-click="onEdit(client)">
 							<i class="fa fa-edit"></i>&nbsp;
 							Edit
 						</button>

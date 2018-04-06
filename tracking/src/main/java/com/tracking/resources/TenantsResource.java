@@ -64,8 +64,8 @@ public class TenantsResource {
 					JsonObject jsonObj = MailUtils.getActivationMail(tenant.getPrimaryEmail(), loginId,
 							TrackingUser.TENANTADMIN);
 					try {
-						Thread t = new Thread(new SendMail(jsonObj));
-						t.start();
+//						Thread t = new Thread(new SendMail(jsonObj));
+//						t.start();
 						response = tenantDAO.create(tenant);
 						Tenant tenantExistObject = tenantDAO.findByTenantCode(tenant.getTenantCode());
 						if (response.getStatus() == 200 && tenantExistObject != null) {

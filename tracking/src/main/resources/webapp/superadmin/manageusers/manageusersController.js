@@ -16,7 +16,7 @@ function manageusersController($scope, $rootScope, $state, dialogs,
     }, 1000);
 	
 //	getBatches();
-//	getTenants();
+	getTenants();
 	
 	function getTenants() {
 		var promise1 = restAPIService.tenantsService().query();
@@ -27,14 +27,7 @@ function manageusersController($scope, $rootScope, $state, dialogs,
 		});
 	}
 
-	function getBatches() {
-		var promise1 = restAPIService.batchesService().query();
-		promise1.$promise.then(function(response) {
-			$scope.batchData = response;
-		}, function(error) {
-			dialogs.error("Error", error.data.error, {'size' : 'sm'});
-		});
-	}
+	
 
 	$scope.onEdit = function(tenant) {
 		$scope.parent = false;
